@@ -1,0 +1,4 @@
+repository "ampersand - minigame/ampersand - minigame@14569203442787@cloud"
+  path "/"
+    br "/main"
+    co "/main"
