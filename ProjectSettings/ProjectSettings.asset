@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: 6dcad6e327bf82f42942ee724475ac54
+  productGUID: 7dffbaae6de4ae046933740157043e05
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: ampersand - minigame
+  productName: ampersand-minigame
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -824,14 +824,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: ampersand - minigame
+  metroPackageName: ampersand-minigame
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: ampersand - minigame
+  metroApplicationDescription: ampersand-minigame
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -900,10 +900,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: dde8a3ab-bccb-4f16-99eb-852926897697
+  cloudProjectId: 5c0d2bdc-03b4-4f69-bf2b-418c95fe6d99
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: ampersand - minigame
+  projectName: ampersand-minigame
   organizationId: skyshim0128_unity
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
