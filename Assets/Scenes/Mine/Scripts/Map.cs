@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Map {
 
-    private Grid<MapGridObject> grid;
+    //private Grid<MapGridObject> grid;
 
     public Map() {
-        grid = new Grid<MapGridObject>(10, 10, 10f, Vector3.zero, (Grid<MapGridObject> global, int x, int y) => new MapGridObject(global, x, y);
+        //grid = new Grid<MapGridObject>(10, 10, 10f, Vector3.zero, (Grid<MapGridObject> global, int x, int y) => new MapGridObject(global, x, y);
     }
 }

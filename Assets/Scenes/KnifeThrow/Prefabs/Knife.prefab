@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3972704012001801381}
   m_Layer: 0
   m_Name: Knife
-  m_TagString: Knife
+  m_TagString: KnifeThrow_Knife
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  isAttached: 0
+  isCollide: 0
+  bounceForce: 30
 --- !u!61 &-7290356089116382484
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -144,7 +145,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 1}
+  m_Size: {x: 0.6, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &3972704012001801381
 Rigidbody2D:

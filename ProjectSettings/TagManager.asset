@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - KnifeThrow_SpinPan
+  - KnifeThrow_Knife
   layers:
   - Default
   - TransparentFX

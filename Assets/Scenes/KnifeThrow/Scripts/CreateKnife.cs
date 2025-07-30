@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThrowKnife : MonoBehaviour
+public class CreateKnife : MonoBehaviour
 {
+    public KnifeUI knifeUI;
+    public RoundManager roundManager;
     [SerializeField] private GameObject Knife;
 
     // Start is called before the first frame update
@@ -25,7 +27,9 @@ public class ThrowKnife : MonoBehaviour
         }
     }
     private void ThrowSelf()
-    {
+    {   
         Instantiate(Knife, new Vector3(0f, -4f, 0f), Quaternion.identity);
+        knifeUI.UseKnife();
+        roundManager.ThrowKnifeCount();
     }
 }
