@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class PanRotate : MonoBehaviour
 {
 
     public float rotationSpeed = 100f;
