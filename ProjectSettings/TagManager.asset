@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Knife
-  - Blocks_2048
+  - KnifeThrow_SpinPan
+  - KnifeThrow_Knife
   layers:
   - Default
   - TransparentFX
