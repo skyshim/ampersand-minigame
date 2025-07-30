@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class KnifeControl : MonoBehaviour
 {
+    public RoundManager roundManager;
+
     public float speed = 15f;
     public bool isCollide = false;
+    public float bounceForce = 50f;
 
     private float circleRadius;
+                    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,12 +31,37 @@ public class KnifeControl : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("충돌 감지: " + collision.gameObject.name);
-        if (!isCollide && collision.gameObject.CompareTag("SpinPan"))
+
+        //칼끼리 충돌
+        if (collision.gameObject.CompareTag("KnifeThrow_Knife"))
+        {
+            if (!isCollide && collision.gameObject.GetComponent<Rigidbody2D>().bodyType == RigidbodyType2D.Kinematic)
+            {
+                isCollide = true;
+                Rigidbody2D rb = GetComponent<Rigidbody2D>();
+                rb.velocity = Vector2.zero;  // 기존 속도 초기화
+
+                Vector2 awayFromStuckKnife = (transform.position - collision.transform.position).normalized;
+
+                rb.AddForce(awayFromStuckKnife * bounceForce, ForceMode2D.Impulse);
+                Destroy(gameObject, 1f);
+
+                roundManager.RoundFail();
+            }
+            // 이미 꽂혀있거나, 던지는 칼끼리 부딪힌 경우 별도 처리 가능
+            return; // 이 경우 원판 충돌 처리 안 함
+        }
+
+        //원판 충돌
+        if (!isCollide && collision.gameObject.CompareTag("KnifeThrow_SpinPan"))
         {
             isCollide = true;
-
+            
             Transform circleTransform = collision.transform;
-            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.velocity = Vector2.zero;
+
 
             CircleCollider2D circleCollider = circleTransform.GetComponent<CircleCollider2D>();
             if (circleCollider != null)
@@ -42,16 +72,11 @@ public class KnifeControl : MonoBehaviour
             {
                 circleRadius = 1f;
             }
-
+            
             Vector2 attachPos = (Vector2)circleTransform.position + Vector2.up * circleRadius;
-
-            // 부모를 원형 오브젝트로 변경
             transform.SetParent(circleTransform);
         }
-        else if (isCollide && collision.gameObject.CompareTag("Knife"))
-        {
-            isCollide = true;
-            Destroy(gameObject, 1f);
-        }
+
+
     }
 }
