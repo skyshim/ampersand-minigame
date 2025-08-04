@@ -5,6 +5,7 @@ public class PlayerScript : MonoBehaviour
     public float moveSpeed = 5f;
     [HideInInspector] public float moveDirection = 0f;
     private Rigidbody2D rb;
+    public GameObject manager;
 
     void Start()
     {
@@ -13,6 +14,8 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
-        rb.velocity = new Vector2(moveDirection * moveSpeed, rb.velocity.y);
+        GameManagerScript managerScript = manager.GetComponent<GameManagerScript>();
+
+        if (!managerScript.isGameOver) { rb.velocity = new Vector2(moveDirection * moveSpeed, rb.velocity.y); }
     }
 }
