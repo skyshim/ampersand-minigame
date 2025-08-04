@@ -18,11 +18,10 @@ public class Player_2048 : MonoBehaviour
     public GameObject block2048;
 
 
-    private Vector3[] posCode = new Vector3[16]; // 블록 위치 코드 리스트
-    private float[] x = { -1.8f, -0.6f, 0.6f, 1.8f }; // x위치코드
-    private float[] y = { 0.3f, -0.9f, -2.1f, -3.3f }; // y위치코드
-    List<bool> isBlock = new List<bool>(); // 블록 리스트
-    private int[] blockValue = new int[16];
+    public Vector3[] posCode = new Vector3[16]; // 블록 위치 코드 리스트
+    public float[] x = { -1.8f, -0.6f, 0.6f, 1.8f }; // x위치코드
+    public float[] y = { 0.3f, -0.9f, -2.1f, -3.3f }; // y위치코드
+    public int[] blockValue = new int[16]; // 블록 값 리스트
 
     public bool playing = false;
     // Start is called before the first frame update
@@ -39,7 +38,6 @@ public class Player_2048 : MonoBehaviour
 
         // 블록 리스트 초기화
         for (int i = 0; i < 16; i++) {
-            isBlock.Add(false); // 블록이 있는지 없는지 초기화
             blockValue[i] = 0; // 블록 값 초기화
         }
 
@@ -65,7 +63,7 @@ public class Player_2048 : MonoBehaviour
     }
 
 
-    // 게임 시작 실행
+    // 게임 시작
     void GameStart() {
         CreateBlock();
         CreateBlock(); // 블록 2개 생성
@@ -82,7 +80,7 @@ public class Player_2048 : MonoBehaviour
         int idx = 0;
         while(true) {
             spawnPosCode = Random.Range(0, 16); // 0~15 사이의 랜덤 코드 생성
-            if (isBlock[spawnPosCode] == false) { // 블록이 없는 위치를 찾음
+            if (blockValue[spawnPosCode] == 0) { // 블록이 없는 위치를 찾음
                 break; // 블록 생성 위치 탐색 종료
             }
             if (idx > 100) { // 블록 생성 위치 탐색 실패
@@ -102,6 +100,5 @@ public class Player_2048 : MonoBehaviour
             Instantiate(block4, spawnPos, Quaternion.identity);
             blockValue[spawnPosCode] = 4; // 블록 값 설정
         }
-        isBlock[spawnPosCode] = true; // 블록 존재함 알림 true
     }
 }
