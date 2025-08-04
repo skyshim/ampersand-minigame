@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b8238cd978f0b2438f5c17729363aa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roundManager: {fileID: 0}
   speed: 15
   isCollide: 0
   bounceForce: 30
