@@ -6,6 +6,8 @@ TagManager:
   tags:
   - KnifeThrow_SpinPan
   - KnifeThrow_Knife
+  - Block2048
+  - button_Money
   layers:
   - Default
   - TransparentFX
