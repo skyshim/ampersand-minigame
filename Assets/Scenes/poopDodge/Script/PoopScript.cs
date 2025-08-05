@@ -14,6 +14,7 @@ public class PoopScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         manager = GameObject.Find("Main Camera&Game Manager");
         managerScript = manager.GetComponent<GameManagerScript>();
+        rb.velocity = new Vector2(0, 1f);
     }
 
     // Update is called once per frame
@@ -22,15 +23,15 @@ public class PoopScript : MonoBehaviour
         if (rb.position.y < -10)
         {
             Destroy(gameObject);
-            if (!managerScript.isGameOver) { managerScript.cnt++; }
-            Debug.Log(managerScript.cnt);
+            if (!managerScript.isGameOver && managerScript.isGameStart) { managerScript.cnt++; }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        managerScript.isGameOver = true;
-        Debug.Log("pooped!!!!!!!!!!!!!!!!!!!");
-        Destroy(gameObject);
+        if (collision.CompareTag("Player")) {
+            managerScript.isGameOver = true;
+            Destroy(gameObject);
+        }
     }
 }
