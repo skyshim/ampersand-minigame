@@ -27,9 +27,13 @@ public class CreateKnife : MonoBehaviour
         }
     }
     private void ThrowSelf()
-    {   
+    {
+        if (!roundManager.CanThrowKnife())
+        {
+            Debug.Log("더이상 칼을 던질 수 없습니다.");
+            return;
+        }
         Instantiate(Knife, new Vector3(0f, -4f, 0f), Quaternion.identity);
         knifeUI.UseKnife();
-        roundManager.ThrowKnifeCount();
     }
 }
