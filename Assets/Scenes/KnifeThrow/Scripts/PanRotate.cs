@@ -78,6 +78,15 @@ public class PanRotate : MonoBehaviour
     public void SetPattern(RotatePattern patternSet)
     {
         pattern = patternSet;
+
+        if (pattern != RotatePattern.Blink)
+        {
+            foreach (Renderer r in GetComponentsInChildren<Renderer>())
+            {
+                r.enabled = true;
+            }
+        }
+
         if (pattern == RotatePattern.Orbit) transform.position = new Vector3(1, 0, 0);
         time = 0;
     }

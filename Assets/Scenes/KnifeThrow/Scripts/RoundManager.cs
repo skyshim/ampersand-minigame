@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class RoundData
@@ -14,9 +15,11 @@ public class RoundData
 public class RoundManager : MonoBehaviour
 {
     public PanRotate spinPan;
+    public CreateKnife createKnife;
     public KnifeUI knifeUI;
     public RoundUI roundUI;
     public TimeControl timer;
+    public RoundResult roundResult;
     [SerializeField] private GameObject Knife;
 
     public RoundData[] rounds;
@@ -24,7 +27,7 @@ public class RoundManager : MonoBehaviour
     public int knifeUsed = 0;
     public int knifeToHit = 0;
 
-    private int index = 8;
+    private int index = 0;
     
 
     void Start()
@@ -63,10 +66,10 @@ public class RoundManager : MonoBehaviour
                 rotatePattern = RotatePattern.Blink,
                 preKnifeAngles= new List<float> {0f, 120f, 240f}
             },
-            new RoundData() { //7라운드 - 빽빽이 진동7
-                knivesToStick = 7,
+            new RoundData() { //7라운드 - 빽빽이 진동5
+                knivesToStick = 5,
                 rotatePattern = RotatePattern.Osilate,
-                preKnifeAngles= new List<float> {0f, 45f, 90f, 180f, 225f, 270f}
+                preKnifeAngles= new List<float> {0f, 30f, 60f, 180f, 210f, 240f}
             },
             new RoundData() { //8라운드 - 크기변하는 5
                 knivesToStick = 5,
@@ -76,12 +79,12 @@ public class RoundManager : MonoBehaviour
             new RoundData() { //9라운드 - 개빠른 10
                 knivesToStick = 10,
                 rotatePattern = RotatePattern.Superfast,
-                preKnifeAngles= new List<float> {}
+                preKnifeAngles= new List<float> {0f, 180f}
             },
             new RoundData() { //10라운드 - 공전
-                knivesToStick = 10,
+                knivesToStick = 7,
                 rotatePattern = RotatePattern.Orbit,
-                preKnifeAngles= new List<float> {0f, 180f}
+                preKnifeAngles= new List<float> {0f}
             },
         };
 
@@ -104,12 +107,16 @@ public class RoundManager : MonoBehaviour
             currentRound = rounds[Random.Range(0, rounds.Length)];
         }
 
+        roundResult.HideAll();
+        spinPan.gameObject.SetActive(true);
 
         knifeToHit = currentRound.knivesToStick;
 
         knifeUI.SetKnives(currentRound.knivesToStick);
         spinPan.SetPattern(currentRound.rotatePattern);
         roundUI.SetRound(index + 1);
+
+        createKnife.SpawnKnife();
 
         foreach (Transform child in spinPan.transform) //기존칼 제거
         {
@@ -149,14 +156,7 @@ public class RoundManager : MonoBehaviour
         knifeUsed++;
         if (knifeUsed == knifeToHit)
         {
-            if (knifeHit == knifeToHit)
-            {
-                RoundSuccess();
-            }
-            else
-            {
-                RoundFail();
-            }
+            RoundSuccess();
         }
     }
 
@@ -174,19 +174,30 @@ public class RoundManager : MonoBehaviour
         {
             roundUI.AddScore(Mathf.RoundToInt(timer.currentTime * 60f));
         }
+        roundResult.ShowClear();
         Invoke("StartRound", 3f);
     }
 
     public void RoundFail()
     {
+        StartCoroutine(RoundFailDelay());
+    }
+
+    IEnumerator RoundFailDelay()
+    {
         Debug.Log("End");
         timer.StopTimer();
+        roundResult.ShowFail();
+
+        yield return new WaitForSeconds(1f);
+        AllUIManager.Instance.ShowResult("칼던지기", () => SceneManager.LoadScene(SceneManager.GetActiveScene().name));
     }
 
     public void OnTimeOver()
     {
         Debug.Log("시간 초과!");
         RoundFail(); // 실패 처리
+
     }
 
     public bool CanThrowKnife()

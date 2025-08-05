@@ -8,6 +8,7 @@ public class KnifeControl : MonoBehaviour
 
     public float speed = 15f;
     public bool isCollide = false;
+    public bool isLaunched = false;
     public float bounceForce = 50f;
 
     private float circleRadius;
@@ -21,10 +22,15 @@ public class KnifeControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isCollide)
+        if (!isCollide && isLaunched)
         {
             transform.Translate(Vector2.up * speed *  Time.deltaTime);
         }
+    }
+
+    public void Launch()
+    {
+        isLaunched = true;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -46,6 +52,7 @@ public class KnifeControl : MonoBehaviour
                 Destroy(gameObject, 1f);
 
                 roundManager.ThrowKnifeCount(false);
+                roundManager.RoundFail();
             }
             // 이미 꽂혀있거나, 던지는 칼끼리 부딪힌 경우 별도 처리 가능
             return; // 이 경우 원판 충돌 처리 안 함
@@ -57,8 +64,8 @@ public class KnifeControl : MonoBehaviour
         {
             AttachToPan(collision.transform);
             roundManager.ThrowKnifeCount(true);
+            FindObjectOfType<CreateKnife>().SpawnKnife();
         }
-
     }
     public void AttachToPan(Transform panTransform)
     {
