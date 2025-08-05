@@ -16,6 +16,8 @@ public class PoopSpawnerScript : MonoBehaviour
     public float time = 1f;
     public float afterSpawn = 0f;
     public float spawnRate;
+    public float minSpawn = 0.3f;
+    public float maxSpawn = 0.7f;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +41,12 @@ public class PoopSpawnerScript : MonoBehaviour
                 transform.position = new Vector3(Random.Range(-4, 5), 8, 0);
                 GameObject poop = Instantiate(poops, transform.position, transform.rotation);
 
-                spawnRate = Random.Range(0.3f, 0.7f);
+                spawnRate = Random.Range(minSpawn, maxSpawn);
+                if (minSpawn > 0.1f) 
+                {
+                    minSpawn -= 0.001f; 
+                }
+                else if (maxSpawn >0.3f) { maxSpawn -= 0.003f; }
             }
         }
         else if (managerScript.isGameStart && !managerScript.isGameOver && managerScript.gamemode == 2)
