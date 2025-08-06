@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 [System.Serializable]
 public class RoundData
@@ -27,8 +29,8 @@ public class RoundManager : MonoBehaviour
     public int knifeUsed = 0;
     public int knifeToHit = 0;
 
-    private int index = 0;
-    
+    public int index = 0;
+    private List<float> randomKnifes = new List<float> { 0f, 30f, 45f, 60f, 90f, 120f, 135f, 150f, 180f, 210f, 225f, 240f, 270f, 300f, 315f, 330f };
 
     void Start()
     {
@@ -98,13 +100,25 @@ public class RoundManager : MonoBehaviour
         knifeHit = 0;
         knifeUsed = 0;
         RoundData currentRound;
-        if (index < rounds.Length) {
+        if (index < 10) {
             currentRound = rounds[index];
         }
         else
         {
             spinPan.baseSpeed += 0.5f;
-            currentRound = rounds[Random.Range(0, rounds.Length)];
+            int knifeCount = Random.Range(0, 5);
+            List<float> preKnife = new List<float>();
+
+            for (int i=0; i < knifeCount; i++)
+            {
+                preKnife.Add(randomKnifes[Random.Range(0, randomKnifes.Count)]);
+            }
+            currentRound = new RoundData()
+            {
+                knivesToStick = (new List<int> { 5, 7, 10 })[Random.Range(0, 3)],
+                rotatePattern = (RotatePattern)Random.Range(1, 9),
+                preKnifeAngles = preKnife
+            };
         }
 
         roundResult.HideAll();
@@ -154,7 +168,7 @@ public class RoundManager : MonoBehaviour
             roundUI.AddScore(Mathf.RoundToInt(700f / knifeToHit));
         }
         knifeUsed++;
-        if (knifeUsed == knifeToHit)
+        if (knifeHit == knifeToHit)
         {
             RoundSuccess();
         }

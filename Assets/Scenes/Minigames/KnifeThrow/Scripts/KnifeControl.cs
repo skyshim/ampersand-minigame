@@ -62,6 +62,7 @@ public class KnifeControl : MonoBehaviour
         //원판 충돌
         if (!isCollide && collision.gameObject.CompareTag("KnifeThrow_SpinPan"))
         {
+            isCollide = true;
             AttachToPan(collision.transform);
             roundManager.ThrowKnifeCount(true);
             FindObjectOfType<CreateKnife>().SpawnKnife();

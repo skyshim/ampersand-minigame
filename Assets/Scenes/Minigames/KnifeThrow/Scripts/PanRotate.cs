@@ -86,6 +86,7 @@ public class PanRotate : MonoBehaviour
                 r.enabled = true;
             }
         }
+        transform.position = Vector3.zero;
 
         if (pattern == RotatePattern.Orbit) transform.position = new Vector3(1, 0, 0);
         time = 0;
