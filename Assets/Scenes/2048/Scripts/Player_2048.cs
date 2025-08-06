@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_2048 : MonoBehaviour
-{
+public class Player_2048 : MonoBehaviour {
     // 블록 프리펩 받기
     public GameObject block2;
     public GameObject block4;
@@ -17,178 +16,110 @@ public class Player_2048 : MonoBehaviour
     public GameObject block1024;
     public GameObject block2048;
 
+    public GameObject[,] blockMap = new GameObject[4, 4]; // 해당 위치에 존재하는 블록 프리펩 저장
+    public int[,] blockValue = new int[4, 4]; // 해당 위치에 존재하는 블록 값 저장
 
-    public Vector3[] posCode = new Vector3[16]; // 블록 위치 코드화
+
+    public Vector2[,] posCode = new Vector2[4,4]; // 블록 위치 코드화
     public float[] x = { -1.8f, -0.6f, 0.6f, 1.8f }; // x위치코드
     public float[] y = { 0.3f, -0.9f, -2.1f, -3.3f }; // y위치코드
-    public int[] blockValue = new int[16]; // 블록 값 리스트
-    public bool[] isMoving = new bool[16]; // 블록 이동 중인지 여부 리스트
-    public int[,] arr_des = new int[16,2]; // 블록 이동 위치 배열
 
-    public bool playing = false;
-    // Start is called before the first frame update
-    void Start() 
-    {
-        // 블록 위치 코드 설정
-        int idx = 0;
+
+    private void Start() {
+        // 블록 위치 코드 초기화
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                posCode[idx] = new Vector3(x[i], y[j], -2f); // 블록 위치 코드 설정
-                idx++;
+                posCode[i,j] = new Vector2(x[i], y[j]);
+                blockValue[i, j] = 0; // 블록 값 초기화
+            }
+        }
+    }
+
+    private void Update() {
+
+    }
+
+    public void CreateBlock() {
+        // 2 또는 4 블록 생성
+        int blockType = Random.Range(0, 10);
+        GameObject blockPrefab = null;
+        if (blockType < 9) {
+            blockPrefab = block2; // 90% 확률로 2 블록 생성
+            blockType = 2; // 블록 값 2로 설정
+        } else {
+            blockPrefab = block4; // 10% 확률로 4 블록 생성
+            blockType = 4; // 블록 값 4로 설정
+        }
+
+        // 빈 칸에 블록 생성
+        do {
+            int i = Random.Range(0, 4);
+            int j = Random.Range(0, 4);
+            if (blockMap[i, j] == null) { // 빈 칸에만 생성
+                GameObject newBlock = Instantiate(blockPrefab, new Vector2(i, j), Quaternion.identity);
+                blockMap[i, j] = newBlock;
+                blockValue[i, j] = blockType; // 블록 값 설정
+                break; // 블록을 생성한 후 반복문 종료
+            }
+        } while (true);
+    }
+
+
+    private void CommandLeft() {
+        bool isMoving = true;
+        for (int y = 0; y < 4; y++) {
+            for (int x = 1; x < 4; x++) {
+                if (blockMap[x, y] != null) {
+                    int targetX = x;
+                    while (targetX > 0 && blockMap[targetX - 1, y] == null) {
+                        targetX--;
+                    }
+
+                    if (targetX != x) {
+                        blockMap[targetX, y] = blockMap[x, y];
+                        blockValue[targetX, y] = blockValue[x, y];
+
+                        blockMap[x, y] = null;
+                        blockValue[x, y] = 0;
+
+                        blockMap[targetX, y].GetComponent<Block_2048>().Move(posCode[x, y], posCode[targetX, y]);
+                    }
+                }
             }
         }
 
-        // 블록 리스트 초기화
-        for (int i = 0; i < 16; i++) {
-            blockValue[i] = 0; // 블록 값 초기화
-        }
-        for (int i = 0; i < 16; i++) {
-            for (int j = 0; j < 2; j++) {
-                arr_des[i,j] = 0; // 블록 이동 위치 배열 초기화
-            }
-        }
-
-
-
-    }
-
-    // Update is called once per frame
-    void Update() 
-    {
-        
-        if (Input.anyKeyDown && (playing == false)) { // 게임 시작   
-            GameStart();
-        }
-
-        string direction = ""; // 이동 방향 변수 초기화
-
-        // 입력받기
-        bool Linput = Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow); 
-        bool Rinput = Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
-        bool Uinput = Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow); 
-        bool Dinput = Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
-        
-        if (Linput) { // 왼쪽 이동
-            direction = "A"; // 왼쪽 이동 방향 설정
-        } else if (Rinput) { // 오른쪽 이동
-            direction = "D"; // 오른쪽 이동 방향 설정
-        } else if (Uinput) { // 위쪽 이동
-            direction = "W"; // 위쪽 이동 방향 설정
-        } else if (Dinput) { // 아래쪽 이동
-            direction = "S"; // 아래쪽 이동 방향 설정
-        }
-
-        MergeProcess(direction); // 블록 이동 전 병합 처리
-
-    }
-
-
-    // 게임 시작
-    void GameStart() {
-        CreateBlock();
-        CreateBlock(); // 블록 2개 생성
-        playing = true;
-
-    }
-
-
-    // 블록 생성 함수
-    public void CreateBlock() 
-    {
-        int spawnPosCode; // 블록 생성 위치 코드
-        // 블록 생성 위치 탐색
-        int idx = 0;
-        while(true) {
-            spawnPosCode = Random.Range(0, 16); // 0~15 사이의 랜덤 코드 생성
-            if (blockValue[spawnPosCode] == 0) { // 블록이 없는 위치를 찾음
-                break; // 블록 생성 위치 탐색 종료
-            }
-            if (idx > 100) { // 블록 생성 위치 탐색 실패
-                Debug.Log("블록 생성 위치 탐색 실패");
-                return; // 블록 생성 위치 탐색 실패시 함수 종료
-            }
-            idx++;
-        }
-        Vector3 spawnPos = posCode[spawnPosCode];
-
-        // 블록 생성
-        int spawnWhat = Random.Range(0, 2);
-        if (spawnWhat == 0) { // 2블록 생성
-            Instantiate(block2, spawnPos, Quaternion.identity);
-            blockValue[spawnPosCode] = 2; // 블록 값 설정
-        } else { // 4블록 생성
-            Instantiate(block4, spawnPos, Quaternion.identity);
-            blockValue[spawnPosCode] = 4; // 블록 값 설정
-        }
-    }
-
-
-    public void CreateMergedBlock(Vector3 spawnPos, int spawnNum) {
-        if (spawnNum == 4) {
-            Instantiate(block4, spawnPos, Quaternion.identity);
-        } else if (spawnNum == 8) {
-            Instantiate(block8, spawnPos, Quaternion.identity);
-        } else if (spawnNum == 16) {
-            Instantiate(block16, spawnPos, Quaternion.identity);
-        } else if (spawnNum == 32) {
-            Instantiate(block32, spawnPos, Quaternion.identity);
-        } else if (spawnNum == 64) {
-            Instantiate(block64, spawnPos, Quaternion.identity);
-        } else if (spawnNum == 128) {
-            Instantiate(block128, spawnPos, Quaternion.identity);
-        } else if (spawnNum == 256) {
-            Instantiate(block256, spawnPos, Quaternion.identity);
-        } else if (spawnNum == 512) {
-            Instantiate(block512, spawnPos, Quaternion.identity);
-        } else if (spawnNum == 1024) {
-            Instantiate(block1024, spawnPos, Quaternion.identity);
-        } else if (spawnNum == 2048) {
-            Instantiate(block2048, spawnPos, Quaternion.identity);
-        }
-    }
-
-
-    // 블록 이동 전 병합 처리 함수
-    public void MergeProcess(string direction) {
+        if (isMoving) return;
+        //합치기 단계
         for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                if (direction == "A") { // 왼쪽 이동 시 병합
-                    if (blockValue[i * 4 + j] == blockValue[i * 4 + j + 1] && blockValue[i * 4 + j] != 0) {
-                        blockValue[i * 4 + j + 1] *= 2; // 병합된 블록 값 설정
-                        CreateMergedBlock(posCode[i * 4 + j], blockValue[i * 4 + j]); // 병합된 블록 생성
-                        blockValue[i * 4 + j + 1] = 0; // 병합된 블록 제거
+            for (int j = 0; j < 3; j++) {
+                if (blockValue[i, j] == blockValue[i, j + 1] && blockValue[i, j] != 0) { // 블록과 왼쪽 블록 값 비교
+                    // 블록 제거
+                    blockMap[i, j].GetComponent<Block_2048>().Die();
+                    blockMap[i, j + 1].GetComponent<Block_2048>().Die();
+
+                    // 변수 업데이트
+                    blockMap[i, j] = null; blockMap[i, j + 1] = null; // 현재 블록 제거
+                    blockValue[i, j] *= 2; blockValue[i, j + 1] = 0; // 블록 값 업데이트
+
+                    // 병합된 블록 생성
+                    GameObject blockPrefab = null;
+                    switch (blockValue[i, j]) {
+                        case 4: blockPrefab = block4; break;
+                        case 8: blockPrefab = block8; break;
+                        case 16: blockPrefab = block16; break;
+                        case 32: blockPrefab = block32; break;
+                        case 64: blockPrefab = block64; break;
+                        case 128: blockPrefab = block128; break;
+                        case 256: blockPrefab = block256; break;
+                        case 512: blockPrefab = block512; break;
+                        case 1024: blockPrefab = block1024; break;
+                        case 2048: blockPrefab = block2048; break;
                     }
-                }
-                else if (direction == "D") { // 오른쪽 이동 시 병합
-                    if (blockValue[i * 4 + 4 - j] == blockValue[i * 4 + 3 - j] && blockValue[i * 4 + 4 - j] != 0) {
-                        blockValue[(i + 1) * 4 + 4 - j] *= 2;
-                        CreateMergedBlock(posCode[i * 4 + 4 - j], blockValue[i * 4 + 4 - j]);
-                        blockValue[(i + 1) * 4 + 3 - j] = 0;
-                    }
-                }
-                else if (direction == "W") { // 위쪽 이동 시 병합
-                    if (blockValue[(4 - i) * 4 + j] == blockValue[(3 - i) * 4 + j] && blockValue[i * 4 + j] != 0) {
-                        blockValue[(4 - i) * 4 + j] *= 2;
-                        CreateMergedBlock(posCode[(4 - i) * 4 + j], blockValue[(4 - i) * 4 + j]);
-                        blockValue[(3 - i) * 4 + j] = 0;
-                    }
-                }
-                else if (direction == "S") { // 아래쪽 이동 시 병합
-                    if (blockValue[i * 4 + j] == blockValue[(i + 1) * 4 + j] && blockValue[i * 4 + j] != 0) {
-                        blockValue[i * 4 + j] *= 2;
-                        CreateMergedBlock(posCode[i * 4 + j], blockValue[i * 4 + j]);
-                        blockValue[(i + 1) * 4 + j] = 0;
-                    }
+                    GameObject newBlock = Instantiate(blockPrefab, new Vector2(i, j), Quaternion.identity);
+                    blockMap[i, j] = newBlock;
                 }
             }
         }
     }
 
-
-    // 블록 이동 명령 함수
-    public void MoveCommand(string direction) {
-        if (direction == "D") {
-
-        }
-    }
 }
