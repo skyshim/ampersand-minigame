@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 using UnityEngine.UI;
 using Firebase.Auth;
 using TMPro;
@@ -66,4 +66,4 @@ public class LoginManager : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-}
+}*/
