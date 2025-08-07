@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public int redScore = 0;
     public int blueScore = 0;
 
-    public float gameTime = 40f; // Á¦ÇÑ ½Ã°£
+    public float gameTime = 40f; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
     private float currentTime;
 
     public TMP_Text timerText;
@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
     }
 
     void Update()
@@ -65,7 +66,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
 
-        countdownText.text = "½ÃÀÛ!";
+        countdownText.text = "ï¿½ï¿½ï¿½ï¿½!";
         yield return new WaitForSeconds(1f);
 
         countdownObj.SetActive(false);
@@ -83,7 +84,7 @@ public class GameManager : MonoBehaviour
     void EndGame()
     {
         timerText.text = "Time's Up!";
-        // °á°ú È­¸é Ç¥½Ã ¶Ç´Â ¸®¼Â
+        // ï¿½ï¿½ï¿½ È­ï¿½ï¿½ Ç¥ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½
 
         int red = Instance.redScore;
         int blue = Instance.blueScore;
@@ -91,11 +92,11 @@ public class GameManager : MonoBehaviour
         resultObj.SetActive(true);
 
         if (red > blue)
-            resultText.text = "»¡°£ÆÀ ½Â¸®!";
+            resultText.text = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â¸ï¿½!";
         else if (blue > red)
-            resultText.text = "ÆÄ¶õÆÀ ½Â¸®!";
+            resultText.text = "ï¿½Ä¶ï¿½ï¿½ï¿½ ï¿½Â¸ï¿½!";
         else
-            resultText.text = "¹«½ÂºÎ!";
+            resultText.text = "ï¿½ï¿½ï¿½Âºï¿½!";
     }
 
 
