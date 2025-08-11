@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/2048/2048.unity
+    path: Assets/Scenes/Start.unity
+    guid: 9cfb25e93b44e3a48a10efbe525d2a54
+  - enabled: 1
+    path: Assets/Scenes/MainMenu/MainMenu.unity
+    guid: c4a392d59a16af9458374ba387f2b63c
+  - enabled: 1
+    path: Assets/Scenes/Minigames/KnifeThrow/KnifeThrow.unity
+    guid: 814e9b66b2917f047b42de03d118c38f
+  - enabled: 1
+    path: Assets/Scenes/Minigames/MoleCatch/MoleCatch.unity
+    guid: a8fa7638d76ecd34ba75803991a02c97
+  - enabled: 1
+    path: Assets/Scenes/Minigames/2048/2048.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
