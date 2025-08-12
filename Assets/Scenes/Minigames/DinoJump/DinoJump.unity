@@ -603,7 +603,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   manager: {fileID: 2137473846}
   force: 10
-  normalG: 2
+  normalG: 3
   reducedG: 1.5
 --- !u!1 &1821812257
 GameObject:
@@ -865,8 +865,8 @@ MonoBehaviour:
   things: {fileID: 4417808457615188892, guid: c228f59551e026442b31daf570c7f5ce, type: 3}
   spawnRate: 1
   afterSpawn: 0
-  minSpawn: 0.7
-  maxSpawn: 2
+  minSpawn: 2
+  maxSpawn: 7
 --- !u!1 &2137473846
 GameObject:
   m_ObjectHideFlags: 0
