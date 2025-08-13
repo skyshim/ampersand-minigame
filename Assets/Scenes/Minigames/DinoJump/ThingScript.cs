@@ -5,6 +5,7 @@ using UnityEngine;
 public class ThingScript : MonoBehaviour
 {
     public GameObject manager;
+    public DinoJumpManagerScript managerScript;
     public Rigidbody2D rb;
 
     public int thingType;
@@ -14,6 +15,7 @@ public class ThingScript : MonoBehaviour
     void Start()
     {
         manager = GameObject.Find("Main Camera&DinoJump Manager");
+        managerScript = manager.GetComponent<DinoJumpManagerScript>();
         x = Random.Range(0.5f, 2.5f);
         y = Random.Range(1f, 1.5f);
         rb = GetComponent<Rigidbody2D>();
@@ -24,11 +26,9 @@ public class ThingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DinoJumpManagerScript managerScript = manager.GetComponent<DinoJumpManagerScript>();
-
         if (!managerScript.isGameovered && managerScript.isGamestarted)
         {
-            rb.velocity = new Vector2(managerScript.gameSpeed * -7, -5);
+            rb.velocity = new Vector2(managerScript.gameSpeed * -7, rb.velocity.y);
         }
         else { rb.velocity = new Vector2(0, 0); }
 
@@ -37,4 +37,10 @@ public class ThingScript : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player")) { managerScript.isGameovered = true; }
+    }
 }
+    

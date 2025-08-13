@@ -43,6 +43,7 @@ public class DinoScript : MonoBehaviour
             else
                 rb.gravityScale = normalG;
         }
+        else { rb.velocity = new Vector2(0, 0); }
     }
 
     public void jump()
