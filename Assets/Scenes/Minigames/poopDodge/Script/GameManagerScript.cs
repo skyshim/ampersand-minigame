@@ -25,6 +25,7 @@ public class GameManagerScript : MonoBehaviour
     {
         gameBtn.onClick.AddListener(gameStart);
         quitBtn.onClick.AddListener(quitGame);
+        Screen.orientation = ScreenOrientation.Portrait;
     }
 
     // Update is called once per frame
