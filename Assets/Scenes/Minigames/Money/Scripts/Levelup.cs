@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UImanagerChallenge : MonoBehaviour
+public class Leveluo : MonoBehaviour
 {
-    public GameObject mainPanel;
-    public GameObject ChallengePanel;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -15,11 +12,6 @@ public class UImanagerChallenge : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        
-    }
-
-    public void OpenLevelUpPanel()
     {
         
     }

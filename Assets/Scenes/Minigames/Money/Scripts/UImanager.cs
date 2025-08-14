@@ -16,6 +16,9 @@ public class Level : MonoBehaviour
     {
         mainPanel.SetActive(true);
         levelUpPanel.SetActive(false);
+        CharacterPanel.SetActive(false);
+        SettingPanel.SetActive(false);
+        ChallengePanel.SetActive(false);
     }
 
     // Update is called once per frame
