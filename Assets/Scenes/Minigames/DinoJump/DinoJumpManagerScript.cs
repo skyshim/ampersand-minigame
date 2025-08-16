@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class DinoJumpManagerScript : MonoBehaviour
 {
@@ -17,7 +19,9 @@ public class DinoJumpManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Screen.autorotateToLandscapeLeft = true;
+        Screen.autorotateToLandscapeRight = true;
+        Screen.orientation = ScreenOrientation.AutoRotation;
     }
 
     // Update is called once per frame
@@ -45,8 +49,14 @@ public class DinoJumpManagerScript : MonoBehaviour
                 bestScore = score;
                 PlayerPrefs.SetInt("BestScore", bestScore);
             }
-            gameText.text = "Best score : " + (int)bestScore;
+            gameText.text = "Your score : " + (int)score + "\nBest score : " + (int)bestScore;
+            scoreText.text = "Tap to Run Again";
             gameText.gameObject.SetActive(true);
+
+            if (Input.touchCount > 0 || Input.GetMouseButton(0))
+            {
+                SceneManager.LoadScene("DinoJump");
+            }
         }
         else { scoreText.text = score.ToString(); }
     }

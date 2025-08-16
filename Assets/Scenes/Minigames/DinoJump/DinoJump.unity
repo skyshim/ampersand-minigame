@@ -156,8 +156,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 48.497894, y: -50}
-  m_SizeDelta: {x: 96.9958, y: 50}
+  m_AnchoredPosition: {x: 114.232025, y: -50}
+  m_SizeDelta: {x: 228.4641, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &91740027
 MonoBehaviour:
@@ -739,7 +739,7 @@ MonoBehaviour:
   manager: {fileID: 2137473846}
   force: 10
   normalG: 3
-  reducedG: 1.5
+  reducedG: 2
 --- !u!1 &1821812257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,8 +1000,8 @@ MonoBehaviour:
   things: {fileID: 3406701721808991895, guid: c228f59551e026442b31daf570c7f5ce, type: 3}
   spawnRate: 1
   afterSpawn: 0
-  minSpawn: 2
-  maxSpawn: 7
+  minSpawn: 1
+  maxSpawn: 2
 --- !u!1 &2137473846
 GameObject:
   m_ObjectHideFlags: 0
