@@ -1,67 +1,132 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class RankingManager : MonoBehaviour
 {
-    public Transform topBarContent;  // TopBar ScrollView Content (가로)
-    public GameObject gameButtonPrefab;  // 게임 선택용 버튼 Prefab
+    [Header("UI References")]
+    public Transform rankingListContent;    // 세로 ScrollView Content (랭킹 리스트)
+    public GameObject rankingItemPrefab;    // 랭킹 리스트 아이템 Prefab
+    public TMP_Text myRankText;            // 내 순위 표시용 Text
+    public Button refreshButton;            // 새로고침 버튼
 
-    public Transform rankingListContent;  // 세로 ScrollView Content (랭킹 리스트)
-    public GameObject rankingItemPrefab;  // 랭킹 리스트 아이템 Prefab
+    private string currentGameId;
+    private Dictionary<string, List<RankingData>> cachedRankingData = new Dictionary<string, List<RankingData>>();
+    private GameButtonManager gameButtonManager;
 
-    public Text myRankText;  // 내 순위 표시용 Text
+    // 랭킹 데이터 클래스
+    [System.Serializable]
+    public class RankingData
+    {
+        public int rank;
+        public string playerName;
+        public int score;
+        public DateTime playTime;
+        public bool isMyRecord; // 내 기록인지 여부
 
-    private List<string> gameNames = new List<string>() { "Game1", "Game2", "Game3", /*...*/};
-    private string currentGame;
+        public RankingData(int rank, string playerName, int score, DateTime playTime = default, bool isMyRecord = false)
+        {
+            this.rank = rank;
+            this.playerName = playerName;
+            this.score = score;
+            this.playTime = playTime == default ? DateTime.Now : playTime;
+            this.isMyRecord = isMyRecord;
+        }
+    }
 
     void Start()
     {
-        CreateGameButtons();
-        // 기본 첫 게임 랭킹 로드
-        if (gameNames.Count > 0)
-            LoadRanking(gameNames[0]);
+        InitializeComponents();
+        InitializeUI();
     }
 
-    void CreateGameButtons()
+    void InitializeComponents()
     {
-        foreach (string gameName in gameNames)
-        {
-            GameObject btnObj = Instantiate(gameButtonPrefab, topBarContent);
-            btnObj.GetComponentInChildren<Text>().text = gameName;
+        // GameButtonManager 참조 가져오기
+        gameButtonManager = FindObjectOfType<GameButtonManager>();
 
-            Button btn = btnObj.GetComponent<Button>();
-            btn.onClick.AddListener(() => OnGameButtonClicked(gameName));
+        if (gameButtonManager != null)
+        {
+            // 게임 선택 이벤트 구독
+            gameButtonManager.OnGameSelected += LoadRankingForGame;
+        }
+        else
+        {
+            Debug.LogError("GameButtonManager를 찾을 수 없습니다!");
         }
     }
 
-    void OnGameButtonClicked(string gameName)
+    void InitializeUI()
     {
-        currentGame = gameName;
-        LoadRanking(gameName);
+        // 새로고침 버튼 이벤트 연결
+        if (refreshButton != null)
+        {
+            refreshButton.onClick.AddListener(() => RefreshCurrentRanking());
+        }
     }
 
-    void LoadRanking(string gameName)
+    // GameButtonManager에서 호출되는 함수
+    public void LoadRankingForGame(string gameId)
     {
-        // TODO: 랭킹 데이터 가져와서 리스트 갱신하기
-        Debug.Log($"랭킹 불러오기: {gameName}");
+        currentGameId = gameId;
+        StartCoroutine(LoadRankingCoroutine(gameId));
+    }
 
+    IEnumerator LoadRankingCoroutine(string gameId)
+    {
+        // 캐시된 데이터가 있는지 확인
+        List<RankingData> rankingDataList;
+
+        if (cachedRankingData.ContainsKey(gameId))
+        {
+            rankingDataList = cachedRankingData[gameId];
+        }
+        else
+        {
+            // TODO: Firebase에서 데이터 가져오기
+            // 임시로 더미 데이터 사용
+            yield return new WaitForSeconds(0.1f); // 짧은 딜레이
+
+            rankingDataList = GenerateDummyRankingData(gameId);
+            cachedRankingData[gameId] = rankingDataList;
+        }
+
+        // 랭킹 리스트 업데이트
+        UpdateRankingList(rankingDataList);
+
+        // 내 순위 업데이트
+        UpdateMyRank(rankingDataList);
+    }
+
+    void UpdateRankingList(List<RankingData> rankingDataList)
+    {
         ClearRankingList();
 
-        // 샘플 더미 데이터 (나중에 DB 연동)
-        List<RankingData> rankingDataList = GetDummyRankingData(gameName);
-
-        // 랭킹 리스트 생성
         foreach (var data in rankingDataList)
         {
             GameObject item = Instantiate(rankingItemPrefab, rankingListContent);
-            item.GetComponent<RankingItem>().SetData(data);
-        }
+            RankingItem rankingItem = item.GetComponent<RankingItem>();
 
-        // 내 순위도 표시 (예: 7위)
-        myRankText.text = $"내 순위: {UnityEngine.Random.Range(1, 100)}위";
+            if (rankingItem != null)
+            {
+                rankingItem.SetData(data);
+            }
+        }
+    }
+
+    void UpdateMyRank(List<RankingData> rankingDataList)
+    {
+        // 내 기록 찾기
+        RankingData myRecord = rankingDataList.Find(data => data.isMyRecord);
+
+        if (myRecord != null && myRankText != null)
+        {
+            myRankText.text = myRecord.rank.ToString();
+            myRankText.color = Color.yellow;
+        }
     }
 
     void ClearRankingList()
@@ -72,26 +137,71 @@ public class RankingManager : MonoBehaviour
         }
     }
 
-    // 임시 더미 랭킹 데이터 클래스와 생성 함수
-    public class RankingData
+    void RefreshCurrentRanking()
     {
-        public int rank;
-        public string playerName;
-        public int score;
+        if (!string.IsNullOrEmpty(currentGameId))
+        {
+            // 캐시 삭제하고 다시 로드
+            if (cachedRankingData.ContainsKey(currentGameId))
+            {
+                cachedRankingData.Remove(currentGameId);
+            }
+
+            LoadRankingForGame(currentGameId);
+        }
     }
 
-    List<RankingData> GetDummyRankingData(string gameName)
+    // 더미 데이터 생성 (나중에 Firebase 연동시 제거)
+    List<RankingData> GenerateDummyRankingData(string gameId)
     {
         List<RankingData> list = new List<RankingData>();
-        for (int i = 1; i <= 10; i++)
+
+        // 플레이어 이름 풀
+        string[] playerNames = { "김민수", "이지영", "박철수", "최영희", "정우진",
+                                "한소영", "오세훈", "임다영", "윤상호", "장미라",
+                                "강동원", "송혜교", "조인성", "전지현", "유재석" };
+
+        for (int i = 1; i <= 20; i++)
         {
-            list.Add(new RankingData()
-            {
-                rank = i,
-                playerName = $"{gameName}_Player{i}",
-                score = UnityEngine.Random.Range(1000, 5000)
-            });
+            bool isMyRecord = (i == UnityEngine.Random.Range(5, 15)); // 랜덤하게 내 기록 설정
+
+            list.Add(new RankingData(
+                rank: i,
+                playerName: playerNames[UnityEngine.Random.Range(0, playerNames.Length)],
+                score: UnityEngine.Random.Range(10000 - (i * 300), 10000 - (i * 200)),
+                playTime: DateTime.Now.AddDays(-UnityEngine.Random.Range(0, 30)),
+                isMyRecord: isMyRecord
+            ));
         }
+
         return list;
+    }
+
+    // 외부에서 새로운 기록 추가시 호출할 함수
+    public void AddNewRecord(string gameId, string playerName, int score)
+    {
+        // TODO: Firebase에 새 기록 추가
+        Debug.Log($"새 기록 추가: {gameId} - {playerName}: {score}점");
+
+        // 캐시 삭제 (다음에 새로 로드하도록)
+        if (cachedRankingData.ContainsKey(gameId))
+        {
+            cachedRankingData.Remove(gameId);
+        }
+
+        // 현재 게임이면 즉시 새로고침
+        if (currentGameId == gameId)
+        {
+            LoadRankingForGame(gameId);
+        }
+    }
+
+    // 특정 게임의 랭킹으로 바로 이동
+    public void ShowGameRanking(string gameId)
+    {
+        if (gameButtonManager != null)
+        {
+            gameButtonManager.SelectGame(gameId);
+        }
     }
 }
