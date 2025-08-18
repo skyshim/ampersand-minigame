@@ -10,7 +10,7 @@ public class ThingSpawnerScript : MonoBehaviour
     public GameObject things;
     public float spawnRate = 1f;
     public float afterSpawn = 0;
-    public float minSpawn = 1f, maxSpawn = 5f;
+    public float minSpawn = 1f, maxSpawn = 2f;
 
     // Start is called before the first frame update
     void Start()
@@ -32,7 +32,9 @@ public class ThingSpawnerScript : MonoBehaviour
                 afterSpawn = 0f;
                 GameObject Thing = Instantiate(things, transform.position, transform.rotation);
 
+                if (maxSpawn > 1.3) { maxSpawn -= Time.deltaTime * 10; }    
                 spawnRate = Random.Range(minSpawn, maxSpawn);
+
 
             }
         }

@@ -204,7 +204,6 @@ public class RoundManager : MonoBehaviour
         roundResult.ShowFail();
 
         yield return new WaitForSeconds(1f);
-        AllUIManager.Instance.ShowResult("Ä®´øÁö±â", () => SceneManager.LoadScene(SceneManager.GetActiveScene().name));
     }
 
     public void OnTimeOver()

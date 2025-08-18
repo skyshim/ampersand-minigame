@@ -11,7 +11,7 @@ public class DinoScript : MonoBehaviour
 
     public float force = 10f;
     public float normalG = 3f;
-    public float reducedG = 1.5f;
+    public float reducedG = 2f;
 
     // Start is called before the first frame update
     void Start()
