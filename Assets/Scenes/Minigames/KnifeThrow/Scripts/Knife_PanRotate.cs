@@ -13,7 +13,7 @@ public enum RotatePattern
     Superfast = 7,
     Orbit = 8,
 }
-public class PanRotate : MonoBehaviour
+public class Knife_PanRotate : MonoBehaviour
 {
 
     public float baseSpeed = 100f;

@@ -5,18 +5,18 @@ using UnityEngine.UI;
 
 
 
-public class TimeControl : MonoBehaviour
+public class Knife_TimeControl : MonoBehaviour
 {
     public Image timerBar;
     public float maxTime = 15f;
     public float currentTime;
 
     private bool isRunning = false;
-    private RoundManager roundManager;
+    private Knife_RoundManager roundManager;
 
     void Start()
     {
-        roundManager = GameObject.Find("GameController").GetComponent<RoundManager>();
+        roundManager = GameObject.Find("GameController").GetComponent<Knife_RoundManager>();
         StartTimer();
     }
 

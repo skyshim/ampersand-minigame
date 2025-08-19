@@ -8,14 +8,14 @@ public enum MoleType
     BlueBomb
 }
 
-public class Mole : MonoBehaviour
+public class Mole_Mole : MonoBehaviour
 {
     public MoleType moleType;
-    private MoleSpawner spawner;
+    private Mole_MoleSpawner spawner;
 
     private void Start()
     {
-        spawner = FindObjectOfType<MoleSpawner>();
+        spawner = FindObjectOfType<Mole_MoleSpawner>();
     }
 
     private void Update()
@@ -59,7 +59,7 @@ public class Mole : MonoBehaviour
                 break;
         }
 
-        GameManager.Instance.AddScore(moleType, scoreChange);
+        Mole_GameManager.Instance.AddScore(moleType, scoreChange);
         Destroy(gameObject);
     }
 }

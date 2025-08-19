@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.8143573, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.44600797, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1155,8 +1155,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1915949318}
+  - component: {fileID: 1915949321}
+  - component: {fileID: 1915949322}
   - component: {fileID: 1915949319}
-  - component: {fileID: 1915949320}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1192,7 +1193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spinPan: {fileID: 1315850656}
-  createKnife: {fileID: 1915949320}
+  createKnife: {fileID: 1915949322}
   knifeUI: {fileID: 1959294981}
   roundUI: {fileID: 1526957663}
   timer: {fileID: 87680731}
@@ -1203,7 +1204,19 @@ MonoBehaviour:
   knifeUsed: 0
   knifeToHit: 0
   index: 0
---- !u!114 &1915949320
+--- !u!114 &1915949321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915949316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c200ba1af59c64a4da4732bccc3fe27d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1915949322
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

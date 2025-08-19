@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoundResult : MonoBehaviour
+public class Knife_RoundResult : MonoBehaviour
 {
     public GameObject clearPanel;
     public GameObject failPanel;
