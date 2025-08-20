@@ -3,9 +3,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class Mole_GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static Mole_GameManager Instance;
 
     public int redScore = 0;
     public int blueScore = 0;
@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     private float currentTime;
 
     public TMP_Text timerText;
-    public MoleSpawner moleSpawner;
+    public Mole_MoleSpawner moleSpawner;
 
     public GameObject countdownObj;
     public GameObject resultObj;
@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
 
-        countdownText.text = "����!";
+        countdownText.text = "게임 시작!";
         yield return new WaitForSeconds(1f);
 
         countdownObj.SetActive(false);
@@ -84,7 +84,6 @@ public class GameManager : MonoBehaviour
     void EndGame()
     {
         timerText.text = "Time's Up!";
-        // ��� ȭ�� ǥ�� �Ǵ� ����
 
         int red = Instance.redScore;
         int blue = Instance.blueScore;
@@ -92,11 +91,11 @@ public class GameManager : MonoBehaviour
         resultObj.SetActive(true);
 
         if (red > blue)
-            resultText.text = "������ �¸�!";
+            resultText.text = "빨간팀 승리!";
         else if (blue > red)
-            resultText.text = "�Ķ��� �¸�!";
+            resultText.text = "파란팀 승리!";
         else
-            resultText.text = "���º�!";
+            resultText.text = "무승부!";
     }
 
 

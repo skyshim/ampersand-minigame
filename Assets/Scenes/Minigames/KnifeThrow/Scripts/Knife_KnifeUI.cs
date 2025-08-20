@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class KnifeUI : MonoBehaviour
+public class Knife_KnifeUI : MonoBehaviour
 {
     public GameObject knifeIconPrefab; // Ä® ¾ÆÀÌÄÜ ÇÁ¸®ÆÕ
 

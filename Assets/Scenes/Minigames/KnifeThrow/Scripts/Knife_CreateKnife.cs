@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CreateKnife : MonoBehaviour
+public class Knife_CreateKnife : MonoBehaviour
 {
-    public KnifeUI knifeUI;
-    public RoundManager roundManager;
+    public Knife_KnifeUI knifeUI;
+    public Knife_RoundManager roundManager;
     [SerializeField] private GameObject Knife;
     private GameObject currentKnife;
 
@@ -39,7 +39,7 @@ public class CreateKnife : MonoBehaviour
             Debug.Log("더이상 칼을 던질 수 없습니다.");
             return;
         }
-        currentKnife.GetComponent<KnifeControl>().Launch();
+        currentKnife.GetComponent<Knife_KnifeControl>().Launch();
         isReadyToThrow = false;
         knifeUI.UseKnife(); 
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class HomeButton : MonoBehaviour
+public class Mole_HomeButton : MonoBehaviour
 {
     public void ExitGame()
     {

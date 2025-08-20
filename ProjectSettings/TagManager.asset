@@ -8,6 +8,8 @@ TagManager:
   - KnifeThrow_Knife
   - Block2048
   - button_Money
+  - Volley_Player
+  - Volley_Ground
   layers:
   - Default
   - TransparentFX

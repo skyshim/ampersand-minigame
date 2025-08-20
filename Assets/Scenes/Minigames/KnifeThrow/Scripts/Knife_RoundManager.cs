@@ -14,14 +14,14 @@ public class RoundData
     public List<float> preKnifeAngles;  // 미리 꽂혀있는 칼 개수 (옵션)
 }
 
-public class RoundManager : MonoBehaviour
+public class Knife_RoundManager : MonoBehaviour
 {
-    public PanRotate spinPan;
-    public CreateKnife createKnife;
-    public KnifeUI knifeUI;
-    public RoundUI roundUI;
-    public TimeControl timer;
-    public RoundResult roundResult;
+    public Knife_PanRotate spinPan;
+    public Knife_CreateKnife createKnife;
+    public Knife_KnifeUI knifeUI;
+    public Knife_RoundUI roundUI;
+    public Knife_TimeControl timer;
+    public Knife_RoundResult roundResult;
     [SerializeField] private GameObject Knife;
 
     public RoundData[] rounds;
@@ -143,7 +143,7 @@ public class RoundManager : MonoBehaviour
         foreach (float angle in currentRound.preKnifeAngles) //장애물칼 추가
         {
             GameObject knife = Instantiate(Knife);
-            KnifeControl kc = knife.GetComponent<KnifeControl>();
+            Knife_KnifeControl kc = knife.GetComponent<Knife_KnifeControl>();
 
             float radius = 1f;
             Vector2 direction = Quaternion.Euler(0, 0, angle) * Vector2.up;

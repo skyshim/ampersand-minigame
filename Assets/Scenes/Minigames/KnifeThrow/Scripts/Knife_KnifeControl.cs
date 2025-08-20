@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KnifeControl : MonoBehaviour
+public class Knife_KnifeControl : MonoBehaviour
 {
-    public RoundManager roundManager;
+    public Knife_RoundManager roundManager;
 
     public float speed = 15f;
     public bool isCollide = false;
@@ -16,7 +16,7 @@ public class KnifeControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        roundManager = GameObject.Find("GameController").GetComponent<RoundManager>();
+        roundManager = GameObject.Find("GameController").GetComponent<Knife_RoundManager>();
     }
 
     // Update is called once per frame
@@ -65,7 +65,7 @@ public class KnifeControl : MonoBehaviour
             isCollide = true;
             AttachToPan(collision.transform);
             roundManager.ThrowKnifeCount(true);
-            FindObjectOfType<CreateKnife>().SpawnKnife();
+            FindObjectOfType<Knife_CreateKnife>().SpawnKnife();
         }
     }
     public void AttachToPan(Transform panTransform)

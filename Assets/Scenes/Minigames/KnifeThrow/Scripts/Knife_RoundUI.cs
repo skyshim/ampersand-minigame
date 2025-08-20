@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RoundUI : MonoBehaviour
+public class Knife_RoundUI : MonoBehaviour
 {
     public Text scoreText;
     public Text roundText;
