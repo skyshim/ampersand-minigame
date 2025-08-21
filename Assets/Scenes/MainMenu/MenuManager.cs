@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
     public TMP_Text popupDescriptionText;
     public TMP_Text rankingInfoText;
     public Button confirmButton;
+    public Button xButton;
 
     private string nextSceneName;   // 확인 후 이동할 씬 이름
 
@@ -16,6 +17,13 @@ public class MenuManager : MonoBehaviour
     {
         popupPanel.SetActive(false);
         confirmButton.onClick.AddListener(OnConfirm);
+
+        if (xButton != null)
+            xButton.onClick.AddListener(ClosePopup);
+    }
+    public void ClosePopup()
+    {
+        popupPanel.SetActive(false);
     }
 
     // 버튼에서 호출

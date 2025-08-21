@@ -1,8 +1,11 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class StartSceneManager : MonoBehaviour
 {
+    public TMP_Text AnneText;
+
     private bool loginCompleted = false;
     private LoginManager loginManager;
 
@@ -46,6 +49,7 @@ public class StartSceneManager : MonoBehaviour
     private void OnLoginSuccess()
     {
         loginCompleted = true;
+        AnneText.text = "클릭하여 시작!";
         Debug.Log("로그인 성공, 다음 클릭 시 MainMenu로 이동");
         AllUIManager.Instance.HideLoginPanel();
     }
