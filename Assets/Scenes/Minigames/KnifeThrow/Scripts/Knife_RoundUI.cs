@@ -8,12 +8,16 @@ public class Knife_RoundUI : MonoBehaviour
     public Text scoreText;
     public Text roundText;
 
-    private int score = 0;
+    public int score = 0;
 
     public void AddScore(int amount)
     {
         score += amount;
         scoreText.text = $"Score: {score}";
+    }
+    public int LoadScore()
+    {
+        return score;
     }
 
     public void SetRound(int round)

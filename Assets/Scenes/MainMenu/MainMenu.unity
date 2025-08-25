@@ -4052,7 +4052,7 @@ MonoBehaviour:
   popupDescriptionText: {fileID: 753842510}
   rankingInfoText: {fileID: 932162466}
   confirmButton: {fileID: 2062931622}
-  xButton: {fileID: 0}
+  xButton: {fileID: 1498452970}
 --- !u!114 &1808443278
 MonoBehaviour:
   m_ObjectHideFlags: 0
