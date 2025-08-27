@@ -10,7 +10,7 @@ public class ThingSpawnerScript : MonoBehaviour
     public GameObject things;
     public float spawnRate = 1f;
     public float afterSpawn = 0;
-    public float minSpawn = 1f, maxSpawn = 2f;
+    public float minSpawn = 2f, maxSpawn = 5f;
 
     // Start is called before the first frame update
     void Start()
