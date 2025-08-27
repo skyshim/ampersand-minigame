@@ -694,7 +694,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &170706028
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1680,8 +1680,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC124\uBA85"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: e0fa23ebc6d1ee548a543d8cce04a776, type: 2}
-  m_sharedMaterial: {fileID: 1280848451804551545, guid: e0fa23ebc6d1ee548a543d8cce04a776, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 947c8970455f907448ef80d2c254bfff, type: 2}
+  m_sharedMaterial: {fileID: 2790341690525929915, guid: 947c8970455f907448ef80d2c254bfff, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1916,8 +1916,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC81C\uBAA9"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2bc8ac6392dc97f45a8224c8fb466c36, type: 2}
-  m_sharedMaterial: {fileID: -1861529107956556943, guid: 2bc8ac6392dc97f45a8224c8fb466c36, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 947c8970455f907448ef80d2c254bfff, type: 2}
+  m_sharedMaterial: {fileID: 2790341690525929915, guid: 947c8970455f907448ef80d2c254bfff, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2152,8 +2152,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uB7AD\uD0B9\uC720\uBB34"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2bc8ac6392dc97f45a8224c8fb466c36, type: 2}
-  m_sharedMaterial: {fileID: -1861529107956556943, guid: 2bc8ac6392dc97f45a8224c8fb466c36, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 947c8970455f907448ef80d2c254bfff, type: 2}
+  m_sharedMaterial: {fileID: 2790341690525929915, guid: 947c8970455f907448ef80d2c254bfff, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2467,8 +2467,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC2DC\uC791\uD558\uAE30"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2bc8ac6392dc97f45a8224c8fb466c36, type: 2}
-  m_sharedMaterial: {fileID: -1861529107956556943, guid: 2bc8ac6392dc97f45a8224c8fb466c36, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 947c8970455f907448ef80d2c254bfff, type: 2}
+  m_sharedMaterial: {fileID: 2790341690525929915, guid: 947c8970455f907448ef80d2c254bfff, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3472,7 +3472,7 @@ PrefabInstance:
     - target: {fileID: 1629026635483733102, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
       propertyPath: m_FontData.m_Font
       value: 
-      objectReference: {fileID: 12800000, guid: 52fd8a0a8453a3c45bee1432685e2050, type: 3}
+      objectReference: {fileID: 12800000, guid: 4835b8e69ea85e749b2f76643ab56672, type: 3}
     - target: {fileID: 7665240873829520347, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 0
@@ -4463,6 +4463,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 702733790}
     m_Modifications:
+    - target: {fileID: 346124625021997979, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a607760af18173242b598db90861f08f, type: 3}
     - target: {fileID: 400554344420560300, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4546,6 +4550,24 @@ PrefabInstance:
     - target: {fileID: 438951544964382119, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
       propertyPath: m_Name
       value: GameFavicon (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1421794651374548514, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
+      propertyPath: title
+      value: "\uB450\uB354\uC9C0\uC7A1\uAE30"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1421794651374548514, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
+      propertyPath: sceneName
+      value: MoleCatch
+      objectReference: {fileID: 0}
+    - target: {fileID: 1421794651374548514, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
+      propertyPath: description
+      value: "\uCE5C\uAD6C\uC640 \uD568\uAED8 \uAC01\uC790\uC758 \uC0C9\uAE54\uC5D0
+        \uB9DE\uB294 \uB450\uB354\uC9C0\uB97C \uC7A1\uC544 \uB300\uACB0\uD558\uB294
+        \uAC8C\uC784\uC785\uB2C8\uB2E4!"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629026635483733102, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
+      propertyPath: m_Text
+      value: "\uB450\uB354\uC9C0\uC7A1\uAE30"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
