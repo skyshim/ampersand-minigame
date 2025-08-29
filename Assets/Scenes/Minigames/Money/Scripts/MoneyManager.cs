@@ -52,4 +52,17 @@ public class Money : MonoBehaviour, IPointerClickHandler
         if (Moneytext != null)
             Moneytext.text = "돈: " + Mathf.FloorToInt(MoneyNum) + "₩";
     }
+    public void SetMoneyAbsolute(float v)
+    {
+        // 안전 가드
+        if (float.IsNaN(v) || float.IsInfinity(v)) v = 0f;
+
+        // 음수 방지 후 값 대입
+        MoneyNum = Mathf.Max(0f, v);
+
+        // UI 갱신 + 변경 알림
+        UpdateText();
+        OnMoneyChanged?.Invoke(MoneyNum);
+    }
+
 }

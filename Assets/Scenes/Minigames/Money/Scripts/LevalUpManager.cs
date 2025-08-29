@@ -9,6 +9,13 @@ using UnityEditor;
 
 public class LevelUpManager : MonoBehaviour
 {
+    public GameObject mainPanel;
+    public GameObject levelUpPanel;
+    public GameObject CharacterPanel;
+    public GameObject SettingPanel;
+    public GameObject ChallengePanel;
+    public GameObject resetConfirmPanel;
+
     [Header("Refs")]
     public Money money;                       // Money 컴포넌트(돈/클릭 파워 보유, float 기반)
     public TextMeshProUGUI levelText;         // 레벨업 창: "1LV"
@@ -264,6 +271,50 @@ public class LevelUpManager : MonoBehaviour
             power += inc;
         }
         Debug.Log(sb.ToString());
+    }
+
+    public void SaveProgress()
+    {
+        SaveSystem.Save(this, money);
+    }
+
+    // 수동 불러오기 버튼에 연결
+    public void LoadProgress()
+    {
+        SaveSystem.Load(this, money);
+        RefreshUI();
+    }
+
+    // 전체 초기화 버튼에 연결
+    public void ResetAllProgress()
+    {
+        // 초기값은 프로젝트에 맞게 조절(기본: 1레벨, 클릭 1000, 돈 0)
+        SaveSystem.ResetAll(this, money, resetLevel: 1, resetClickValue: 1000, resetMoney: 0f);
+        RefreshUI();
+    }
+
+    // 앱 종료 시 자동 저장(선택)
+    void OnApplicationQuit()
+    {
+        SaveSystem.Save(this, money);
+    }
+
+
+    //reset 패널 열기(아마 UImanager로 할듯)
+    //public void OpenResetConfirm() {
+    //    if (resetConfirmPanel != null) resetConfirmPanel.SetActive(true);
+    //}
+    public void CloseResetConfirm() {
+        mainPanel.SetActive(true);
+        levelUpPanel.SetActive(false);
+        CharacterPanel.SetActive(false);
+        SettingPanel.SetActive(false);
+        ChallengePanel.SetActive(false);
+        resetConfirmPanel.SetActive(false);
+}
+    public void ConfirmResetAndClose() {
+        ResetAllProgress();
+        CloseResetConfirm();
     }
 #endif
 }
