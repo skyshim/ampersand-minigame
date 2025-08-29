@@ -4,22 +4,28 @@ using Firebase.Auth;
 using Firebase.Firestore;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class RankingManager : MonoBehaviour
 {
+    public static RankingManager Instance { get; private set; }
+
     [Header("UI References")]
     public Transform rankingListContent;
     public GameObject rankingItemPrefab;
-    public TMP_Text myRankText;
+    public GameObject myRankingItem;
     public GameObject rankingPopup;
+    public Button closeButton;
 
     private string currentGameId;
     private FirebaseFirestore db;
-    private FirebaseAuth auth;
+    public FirebaseAuth auth;
 
     [System.Serializable]
     public class RankingData
     {
+        
+
         public int rank;
         public string playerName;
         public float score;
@@ -41,9 +47,32 @@ public class RankingManager : MonoBehaviour
         // Firebase 초기화 확인
         if (db == null) Debug.LogError("Firestore 초기화 실패");
         if (auth == null) Debug.LogError("Auth 초기화 실패");
+
+        if (closeButton != null)
+        {
+            closeButton.onClick.AddListener(CloseRankingPopup);
+        }
+
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); //  씬 이동해도 유지
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    public async void LoadRankingForGame(string gameId)
+    public void CloseRankingPopup()
+    {
+        if (rankingPopup != null)
+        {
+            rankingPopup.SetActive(false);
+        }
+    }
+
+    public async void LoadRankingForGame(string gameId, bool isLowestBetter = false)
     {
         currentGameId = gameId;
         Debug.Log($"랭킹 로드 시작: {gameId}");
@@ -51,10 +80,10 @@ public class RankingManager : MonoBehaviour
         try
         {
             // 수정된 경로: gameScores/{gameId}/records
-            var query = db.Collection("gameScores").Document(gameId)
-                          .Collection("records")
-                          .OrderByDescending("score") // 필요 시 최단 기록 게임은 ascending으로
-                          .Limit(50);
+            var collectionRef = db.Collection("gameScores").Document(gameId).Collection("records");
+            var query = isLowestBetter
+                ? collectionRef.OrderBy("score").Limit(50)           // 오름차순
+                : collectionRef.OrderByDescending("score").Limit(50); // 내림차순
 
             Debug.Log($"쿼리 경로: gameScores/{gameId}/records");
 
@@ -66,11 +95,6 @@ public class RankingManager : MonoBehaviour
                 Debug.LogWarning($"게임 {gameId}에 점수 기록이 없습니다.");
                 // UI 초기화
                 foreach (Transform child in rankingListContent) Destroy(child.gameObject);
-                if (myRankText != null)
-                {
-                    myRankText.text = "기록 없음";
-                    myRankText.color = Color.gray;
-                }
                 return;
             }
 
@@ -97,12 +121,6 @@ public class RankingManager : MonoBehaviour
         {
             Debug.LogError($"랭킹 로드 실패: {e.Message}");
             Debug.LogError($"스택 트레이스: {e.StackTrace}");
-
-            if (myRankText != null)
-            {
-                myRankText.text = "로드 실패";
-                myRankText.color = Color.red;
-            }
         }
     }
 
@@ -133,17 +151,24 @@ public class RankingManager : MonoBehaviour
     void UpdateMyRank(List<RankingData> rankingList)
     {
         var myRecord = rankingList.Find(r => r.isMyRecord);
-        if (myRankText != null)
+
+        if (myRankingItem != null)
         {
-            if (myRecord != null)
+            var myRankingComp = myRankingItem.GetComponent<RankingItem>();
+            if (myRankingComp != null)
             {
-                myRankText.text = $"{myRecord.rank}";
-                myRankText.color = Color.yellow;
-            }
-            else
-            {
-                myRankText.text = "?";
-                myRankText.color = Color.gray;
+                if (myRecord != null)
+                {
+                    // 내 랭킹 데이터 적용
+                    myRankingComp.SetData(myRecord);
+                }
+                else
+                {
+                    // 기록이 없을 경우 초기화
+                    myRankingComp.rankText.text = "-";
+                    myRankingComp.playerNameText.text = "기록 없음";
+                    myRankingComp.scoreText.text = "-";
+                }
             }
         }
     }
@@ -172,7 +197,7 @@ public class RankingManager : MonoBehaviour
             {
                 var data = new Dictionary<string, object>
                 {
-                    { "displayName", playerName },
+                    { "nickname", playerName },
                     { "score", score },
                     { "timestamp", Timestamp.GetCurrentTimestamp() }
                 };

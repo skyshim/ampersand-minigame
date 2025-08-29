@@ -12,6 +12,7 @@ public class GameButtonManager : MonoBehaviour
         public string gameId;
         public string displayName;
         public Color themeColor;
+        public bool isLowestBetter = false;
 
         [HideInInspector] public Image buttonImage;
         [HideInInspector] public TMP_Text buttonText;
@@ -34,7 +35,7 @@ public class GameButtonManager : MonoBehaviour
     void Start()
     {
         if (gameButtons.Length > 0 && gameButtons[0].button != null)
-            SelectGame(gameButtons[0].gameId);
+            SelectGame(gameButtons[0].gameId, gameButtons[0].isLowestBetter);
     }
 
     void InitializeButtons()
@@ -57,17 +58,17 @@ public class GameButtonManager : MonoBehaviour
 
             string gameId = buttonInfo.gameId;
             buttonInfo.button.onClick.RemoveAllListeners();
-            buttonInfo.button.onClick.AddListener(() => SelectGame(gameId));
+            buttonInfo.button.onClick.AddListener(() => SelectGame(gameId, buttonInfo.isLowestBetter));
 
             buttonInfo.button.gameObject.SetActive(true);
         }
     }
 
-    public void SelectGame(string gameId)
+    public void SelectGame(string gameId, bool isLowestBetter)
     {
         currentSelectedGameId = gameId;
         UpdateButtonStates();
-        rankingManager?.LoadRankingForGame(gameId);
+        rankingManager?.LoadRankingForGame(gameId, isLowestBetter);
         OnGameSelected?.Invoke(gameId);
         Debug.Log($"∞‘¿” º±≈√µ : {gameId}");
     }

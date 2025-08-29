@@ -10,7 +10,7 @@ public class Mole_GameManager : MonoBehaviour
     public int redScore = 0;
     public int blueScore = 0;
 
-    public float gameTime = 40f; // ���� �ð�
+    public float gameTime = 40f;
     private float currentTime;
 
     public TMP_Text timerText;
