@@ -12,36 +12,51 @@ public class Mole_Mole : MonoBehaviour
 {
     public MoleType moleType;
     private Mole_MoleSpawner spawner;
+    Animator animator;
+
+    private bool isTouched = false;
 
     private void Start()
     {
         spawner = FindObjectOfType<Mole_MoleSpawner>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        // 터치가 있을 때
+        Vector2 inputPos = Vector2.zero;
+        bool inputDetected = false;
+
+        // 모바일 터치
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
-
             if (touch.phase == TouchPhase.Began)
             {
-                Vector3 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
-                Vector2 touchPos2D = new Vector2(touchPos.x, touchPos.y);
-
-                RaycastHit2D hit = Physics2D.Raycast(touchPos2D, Vector2.zero);
-                if (hit.collider != null && hit.collider.gameObject == this.gameObject)
-                {
-                    HandleHit();
-                }
+                inputPos = Camera.main.ScreenToWorldPoint(touch.position);
+                inputDetected = true;
             }
         }
-    }
+        // PC 마우스 클릭
+        else if (Input.GetMouseButtonDown(0))
+        {
+            inputPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            inputDetected = true;
+        }
 
-    private void OnMouseDown()
-    {
-        HandleHit();
+        if (inputDetected)
+        {
+            Vector2 inputPos2D = new Vector2(inputPos.x, inputPos.y);
+            RaycastHit2D hit = Physics2D.Raycast(inputPos2D, Vector2.zero);
+
+            if (hit.collider != null && hit.collider.gameObject == this.gameObject && !isTouched)
+            {
+                if (animator != null)
+                    animator.SetTrigger("OnClick");
+
+                HandleHit();
+            }
+        }
     }
 
     private void HandleHit()
@@ -60,6 +75,7 @@ public class Mole_Mole : MonoBehaviour
         }
 
         Mole_GameManager.Instance.AddScore(moleType, scoreChange);
-        Destroy(gameObject);
+        isTouched = true;
+        Destroy(gameObject, 0.3f);
     }
 }

@@ -16,10 +16,10 @@ public class ThingScript : MonoBehaviour
     {
         manager = GameObject.Find("Main Camera&DinoJump Manager");
         managerScript = manager.GetComponent<DinoJumpManagerScript>();
-        x = Random.Range(1f, 2f);
+        x = Random.Range(1f, 2.3f);
         y = Random.Range(1.5f, 2f);
         rb = GetComponent<Rigidbody2D>();
-        transform.localScale = new Vector3(x, y, 1);
+        transform.localScale = new Vector3(y, x, 1);
     }
 
 

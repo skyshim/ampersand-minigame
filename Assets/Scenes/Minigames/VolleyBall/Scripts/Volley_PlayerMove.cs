@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class Volley_PlayerController : MonoBehaviour
@@ -8,9 +9,13 @@ public class Volley_PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded = true;
 
+    private bool moveLeft, moveRight, actionPressed;
+
     public LayerMask ballLayer;
     public float spikeForce = 12f;
     public Transform hitPoint; // 손 위치 같은 Transform
+
+    public TMP_Text actionButtonText;
 
     void Start()
     {
@@ -29,14 +34,14 @@ public class Volley_PlayerController : MonoBehaviour
         if (playerId == 1)
         {
             Vector3 pos = transform.position;
-            pos.x = Mathf.Min(pos.x, 0f); // 0 이상 못 넘어감
+            pos.x = Mathf.Min(pos.x, -0.1f); // 0 이상 못 넘어감
             transform.position = pos;
         }
         // Player2: 오른쪽 영역
         else if (playerId == 2)
         {
             Vector3 pos = transform.position;
-            pos.x = Mathf.Max(pos.x, 0f); // 0 이하 못 넘어감
+            pos.x = Mathf.Max(pos.x, 0.1f); // 0 이하 못 넘어감
             transform.position = pos;
         }
     }
@@ -66,6 +71,21 @@ public class Volley_PlayerController : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
                 Spike();
+        }
+
+        if (moveLeft) move = -1;
+        if (moveRight) move = 1;
+        if (actionPressed)
+        {
+            if (isGrounded) Jump();
+            else Spike();
+            actionPressed = false;
+        }
+
+        if (actionButtonText != null)
+        {
+            if (isGrounded) actionButtonText.text = "↑";   // 점프
+            else actionButtonText.text = "* ";             // 스파이크
         }
 
         rb.velocity = new Vector2(move * moveSpeed, rb.velocity.y);
@@ -132,4 +152,11 @@ public class Volley_PlayerController : MonoBehaviour
         if (collision.contacts[0].normal.y > 0.5f)
             isGrounded = true;
     }
+
+
+    public void OnMoveLeftDown() { moveLeft = true; }
+    public void OnMoveLeftUp() { moveLeft = false; }
+    public void OnMoveRightDown() { moveRight = true; }
+    public void OnMoveRightUp() { moveRight = false; }
+    public void OnActionButton() { actionPressed = true; }
 }

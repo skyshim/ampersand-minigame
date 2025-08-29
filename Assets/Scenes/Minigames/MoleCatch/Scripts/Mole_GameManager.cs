@@ -18,7 +18,6 @@ public class Mole_GameManager : MonoBehaviour
 
     public GameObject countdownObj;
     public GameObject resultObj;
-    public TMP_Text countdownText;
     public TMP_Text resultText;
 
     public TMP_Text redScoreText1;
@@ -60,14 +59,7 @@ public class Mole_GameManager : MonoBehaviour
     {
         countdownObj.SetActive(true);
 
-        for (int i = 3; i > 0; i--)
-        {
-            countdownText.text = i.ToString();
-            yield return new WaitForSeconds(1f);
-        }
-
-        countdownText.text = "게임 시작!";
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
 
         countdownObj.SetActive(false);
 
