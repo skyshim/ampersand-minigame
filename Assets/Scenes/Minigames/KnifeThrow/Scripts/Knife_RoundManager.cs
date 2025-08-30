@@ -22,7 +22,6 @@ public class Knife_RoundManager : MonoBehaviour
     public Knife_RoundUI roundUI;
     public Knife_TimeControl timer;
     public Knife_RoundResult roundResult;
-    public Knife_Firestore firestore;
     [SerializeField] private GameObject Knife;
 
     public RoundData[] rounds;
@@ -193,10 +192,15 @@ public class Knife_RoundManager : MonoBehaviour
         Invoke("StartRound", 3f);
     }
 
-    public async void RoundFail()
+    public void RoundFail()
     {
         int finalScore = roundUI.LoadScore();
-        await firestore.SaveScore("knife", finalScore);
+        string playerName = "Guest";
+        var user = RankingManager.Instance.auth.CurrentUser;
+        if (user != null)
+            playerName = user.DisplayName ?? "Guest";
+
+        RankingManager.Instance.AddNewRecord("knife", playerName, finalScore, false);
         StartCoroutine(RoundFailDelay());
     }
 

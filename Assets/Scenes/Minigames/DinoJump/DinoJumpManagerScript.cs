@@ -12,6 +12,7 @@ public class DinoJumpManagerScript : MonoBehaviour
     public TMP_Text scoreText;
 
     public int score = 0;
+    public float tm = 0f;
     public float gameSpeed = 1f;
     public bool isGamestarted = false;
     public bool isGameovered = false;
@@ -38,7 +39,8 @@ public class DinoJumpManagerScript : MonoBehaviour
         if (!isGameovered && isGamestarted)
         {
             gameSpeed += Time.deltaTime * Time.deltaTime;
-            score += (int)gameSpeed;
+            tm += Time.deltaTime;
+            score = (int)tm;
             scoreText.text = score.ToString();
         }
         if (isGameovered)

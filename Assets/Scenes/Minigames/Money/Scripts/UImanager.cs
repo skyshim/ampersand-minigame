@@ -10,6 +10,7 @@ public class Level : MonoBehaviour
     public GameObject CharacterPanel;
     public GameObject SettingPanel;
     public GameObject ChallengePanel;
+    public GameObject resetConfirmPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class Level : MonoBehaviour
         CharacterPanel.SetActive(false);
         SettingPanel.SetActive(false);
         ChallengePanel.SetActive(false);
+        resetConfirmPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -34,6 +36,7 @@ public class Level : MonoBehaviour
         SettingPanel.SetActive(false);
         CharacterPanel.SetActive(false);
         levelUpPanel.SetActive(true);
+        resetConfirmPanel.SetActive(false);
     }
 
     public void OpenCharacterPanel()
@@ -43,6 +46,7 @@ public class Level : MonoBehaviour
         SettingPanel.SetActive(false);
         CharacterPanel.SetActive(true);
         levelUpPanel.SetActive(false);
+        resetConfirmPanel.SetActive(false);
     }
 
     public void OpenSettingPanel()
@@ -52,6 +56,7 @@ public class Level : MonoBehaviour
         SettingPanel.SetActive(true);
         CharacterPanel.SetActive(false);
         levelUpPanel.SetActive(false);
+        resetConfirmPanel.SetActive(false);
     }
     public void OpenChallengePanel()
     {
@@ -60,7 +65,9 @@ public class Level : MonoBehaviour
         SettingPanel.SetActive(false);
         CharacterPanel.SetActive(false);
         levelUpPanel.SetActive(false);
+        resetConfirmPanel.SetActive(false);
     }
+
     public void ReturnToMainPanel()
     {
         mainPanel.SetActive(true);
@@ -68,5 +75,15 @@ public class Level : MonoBehaviour
         SettingPanel.SetActive(false);
         CharacterPanel.SetActive(false);
         levelUpPanel.SetActive(false);
+        resetConfirmPanel.SetActive(false);
+    }
+
+    public void OpenResetConfiomPanel(){
+        mainPanel.SetActive(false);
+        ChallengePanel.SetActive(false);
+        SettingPanel.SetActive(false);
+        CharacterPanel.SetActive(false);
+        levelUpPanel.SetActive(false);
+        resetConfirmPanel.SetActive(true);
     }
 }

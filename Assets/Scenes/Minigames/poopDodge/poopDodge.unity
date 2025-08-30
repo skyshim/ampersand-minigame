@@ -1956,6 +1956,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   manager: {fileID: 1896591508}
+  floorpoop: {fileID: 0}
+  isOnFloor: 0
 --- !u!58 &1197370583
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4013,6 +4015,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 53620053209813449, guid: 8089781848aa18a4e97306dee88c5109, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1168317b868f0d7498f767726e204eee, type: 3}
     - target: {fileID: 2661397953457987793, guid: 8089781848aa18a4e97306dee88c5109, type: 3}
       propertyPath: m_Name
       value: Poop
@@ -4025,13 +4031,21 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 1896591508}
+    - target: {fileID: 6077697155839173113, guid: 8089781848aa18a4e97306dee88c5109, type: 3}
+      propertyPath: floorpoop
+      value: 
+      objectReference: {fileID: 21300000, guid: f7763215a86fb3048aae36269783b491, type: 3}
+    - target: {fileID: 8846710332198383168, guid: 8089781848aa18a4e97306dee88c5109, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8846710332198383168, guid: 8089781848aa18a4e97306dee88c5109, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8846710332198383168, guid: 8089781848aa18a4e97306dee88c5109, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10
+      value: -11.13
       objectReference: {fileID: 0}
     - target: {fileID: 8846710332198383168, guid: 8089781848aa18a4e97306dee88c5109, type: 3}
       propertyPath: m_LocalPosition.z
