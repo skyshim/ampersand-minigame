@@ -10,6 +10,7 @@ TagManager:
   - button_Money
   - Volley_Player
   - Volley_Ground
+  - Fruit_SuBak-Game
   layers:
   - Default
   - TransparentFX

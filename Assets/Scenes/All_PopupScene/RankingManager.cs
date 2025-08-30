@@ -5,8 +5,7 @@ using Firebase.Firestore;
 using UnityEngine;
 using TMPro;
 
-public class RankingManager : MonoBehaviour
-{
+public class RankingManager : MonoBehaviour {
     [Header("UI References")]
     public Transform rankingListContent;
     public GameObject rankingItemPrefab;
@@ -18,14 +17,12 @@ public class RankingManager : MonoBehaviour
     private FirebaseAuth auth;
 
     [System.Serializable]
-    public class RankingData
-    {
+    public class RankingData {
         public int rank;
         public string playerName;
         public float score;
         public bool isMyRecord;
-        public RankingData(int rank, string playerName, float score, bool isMyRecord)
-        {
+        public RankingData(int rank, string playerName, float score, bool isMyRecord) {
             this.rank = rank;
             this.playerName = playerName;
             this.score = score;
@@ -33,8 +30,7 @@ public class RankingManager : MonoBehaviour
         }
     }
 
-    void Awake()
-    {
+    void Awake() {
         db = FirebaseFirestore.DefaultInstance;
         auth = FirebaseAuth.DefaultInstance;
 
@@ -43,13 +39,11 @@ public class RankingManager : MonoBehaviour
         if (auth == null) Debug.LogError("Auth 초기화 실패");
     }
 
-    public async void LoadRankingForGame(string gameId)
-    {
-        currentGameId = gameId;
+    public async void LoadRankingForGame(string gameId) {
+        //currentGameId = gameId;
         Debug.Log($"랭킹 로드 시작: {gameId}");
 
-        try
-        {
+        try {
             // 수정된 경로: gameScores/{gameId}/records
             var query = db.Collection("gameScores").Document(gameId)
                           .Collection("records")
@@ -61,13 +55,11 @@ public class RankingManager : MonoBehaviour
             var snap = await query.GetSnapshotAsync();
             Debug.Log($"스냅샷 가져옴: {snap.Count}개 문서");
 
-            if (snap.Count == 0)
-            {
+            if (snap.Count == 0) {
                 Debug.LogWarning($"게임 {gameId}에 점수 기록이 없습니다.");
                 // UI 초기화
                 foreach (Transform child in rankingListContent) Destroy(child.gameObject);
-                if (myRankText != null)
-                {
+                if (myRankText != null) {
                     myRankText.text = "기록 없음";
                     myRankText.color = Color.gray;
                 }
@@ -77,8 +69,7 @@ public class RankingManager : MonoBehaviour
             var rankingList = new List<RankingData>();
             int rank = 1;
 
-            foreach (var doc in snap.Documents)
-            {
+            foreach (var doc in snap.Documents) {
                 Debug.Log($"문서 ID: {doc.Id}");
 
                 string name = doc.ContainsField("nickname") ? doc.GetValue<string>("nickname") : "Unknown";
@@ -93,67 +84,53 @@ public class RankingManager : MonoBehaviour
             UpdateRankingList(rankingList);
             UpdateMyRank(rankingList);
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             Debug.LogError($"랭킹 로드 실패: {e.Message}");
             Debug.LogError($"스택 트레이스: {e.StackTrace}");
 
-            if (myRankText != null)
-            {
+            if (myRankText != null) {
                 myRankText.text = "로드 실패";
                 myRankText.color = Color.red;
             }
         }
     }
 
-    void UpdateRankingList(List<RankingData> rankingList)
-    {
+    void UpdateRankingList(List<RankingData> rankingList) {
         // 기존 아이템들 삭제
-        foreach (Transform child in rankingListContent)
-        {
+        foreach (Transform child in rankingListContent) {
             Destroy(child.gameObject);
         }
 
         // 새로운 랭킹 아이템들 생성
-        foreach (var data in rankingList)
-        {
+        foreach (var data in rankingList) {
             GameObject item = Instantiate(rankingItemPrefab, rankingListContent);
             RankingItem ri = item.GetComponent<RankingItem>();
-            if (ri != null)
-            {
+            if (ri != null) {
                 ri.SetData(data);
             }
-            else
-            {
+            else {
                 Debug.LogWarning("RankingItem 컴포넌트를 찾을 수 없습니다.");
             }
         }
     }
 
-    void UpdateMyRank(List<RankingData> rankingList)
-    {
+    void UpdateMyRank(List<RankingData> rankingList) {
         var myRecord = rankingList.Find(r => r.isMyRecord);
-        if (myRankText != null)
-        {
-            if (myRecord != null)
-            {
+        if (myRankText != null) {
+            if (myRecord != null) {
                 myRankText.text = $"{myRecord.rank}";
                 myRankText.color = Color.yellow;
             }
-            else
-            {
+            else {
                 myRankText.text = "?";
                 myRankText.color = Color.gray;
             }
         }
     }
 
-    public async void AddNewRecord(string gameId, string playerName, float score, bool isLowestBetter = false)
-    {
-        try
-        {
-            if (auth.CurrentUser == null)
-            {
+    public async void AddNewRecord(string gameId, string playerName, float score, bool isLowestBetter = false) {
+        try {
+            if (auth.CurrentUser == null) {
                 Debug.LogWarning("사용자가 로그인되어 있지 않습니다.");
                 return;
             }
@@ -168,8 +145,7 @@ public class RankingManager : MonoBehaviour
             float oldScore = snap.Exists ? snap.GetValue<float>("score") : (isLowestBetter ? float.MaxValue : float.MinValue);
 
             bool better = isLowestBetter ? score < oldScore : score > oldScore;
-            if (better || !snap.Exists)
-            {
+            if (better || !snap.Exists) {
                 var data = new Dictionary<string, object>
                 {
                     { "displayName", playerName },
@@ -180,18 +156,15 @@ public class RankingManager : MonoBehaviour
                 Debug.Log($"점수 기록 업데이트 완료! 게임: {gameId}, 점수: {score}");
 
                 // 현재 게임의 랭킹이면 다시 로드
-                if (gameId == currentGameId)
-                {
+                if (gameId == currentGameId) {
                     LoadRankingForGame(gameId);
                 }
             }
-            else
-            {
+            else {
                 Debug.Log($"기존 점수({oldScore})가 더 좋아서 업데이트하지 않습니다. 새 점수: {score}");
             }
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             Debug.LogError($"점수 저장 실패: {e.Message}");
             Debug.LogError($"스택 트레이스: {e.StackTrace}");
         }
