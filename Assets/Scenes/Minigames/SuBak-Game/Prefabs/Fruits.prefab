@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5096968712801522863}
   m_Layer: 0
   m_Name: Fruits
-  m_TagString: Untagged
+  m_TagString: Fruit_SuBak-Game
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,8 +162,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fruitLevel: 1
-  baseRadius: 0.5
-  fruitSprites: []
-  fruitScores: 0a000000140000002800000050000000a0000000400100008002000000050000000a000000140000
-  mergeScaleDuration: 0.01
-  colliderDisableTime: 0.02
