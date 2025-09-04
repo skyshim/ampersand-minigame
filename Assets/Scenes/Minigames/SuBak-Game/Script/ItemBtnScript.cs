@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayBtnScript : MonoBehaviour
+public class ItemBtnScript : MonoBehaviour
 {
     public UnityEvent onClick;
     private UM um;
 
-    private bool getInput = true;
+    private bool getInput = false;
 
     void Start() {
         um = FindObjectOfType<UM>();
@@ -17,10 +17,10 @@ public class PlayBtnScript : MonoBehaviour
     private void OnEnable() {
         getInput = true;
     }
+
     private void OnDisable() {
         getInput = false;
     }
-
 
     private void OnMouseDown() {
         if (getInput) {
@@ -31,5 +31,4 @@ public class PlayBtnScript : MonoBehaviour
     public void Onclick() {
         onClick.Invoke();
     }
-
 }

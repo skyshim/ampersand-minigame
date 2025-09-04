@@ -14,78 +14,86 @@ public class UM : MonoBehaviour
     [SerializeField] private GameObject title;
     [SerializeField] private GameObject over;
     [SerializeField] private GameObject clear;
-    [SerializeField] private GameObject menu;
+    [SerializeField] private GameObject menuBtn;
     [SerializeField] private GameObject resetBtn;
     [SerializeField] private GameObject continueBtn;
     [SerializeField] private GameObject playBtn;
     [SerializeField] private GameObject itemBtn;
-
-
-    public bool isPaused = false;
-    public int pauseCode = 0; // 0 - 없음 , 1 - 최초 시작 , 2 - 게임 오버 , 3 - 클리어 , 4 - 메뉴
-
+    [SerializeField] private GameObject exitBtn;
 
 
     void Start() {
         gr = FindObjectOfType<GameResult>();
     }
+    
 
-    private void OnEnable() {
+    public void OpenUI(int code) {
         bgf.SetActive(true);
         window.SetActive(true);
 
-        switch (pauseCode) {
-            case 1:
+        switch (code) {
+            case 1: // 초기
                 title.SetActive(true);
                 playBtn.SetActive(true);
                 itemBtn.SetActive(true);
                 break;
-            case 2:
+            case 2: // 게임오버
                 over.SetActive(true);
-                playBtn.SetActive(true);
+                resetBtn.SetActive(true);
                 itemBtn.SetActive(true);
                 break;
-            case 3:     
+            case 3: // 클리어
                 clear.SetActive(true);
                 continueBtn.SetActive(true);
                 resetBtn.SetActive(true);
                 break;
-            case 4:
-                menu.SetActive(true);
+            case 4: // 메뉴
                 continueBtn.SetActive(true);
                 resetBtn.SetActive(true);
+                exitBtn.SetActive(true);
                 break;
         }
-        isPaused = true;
+
+        gr.isGameOver = true;
     }
 
 
-    void Update()
-    {
-        if (!isPaused) {
-            StartCoroutine(Pause(0.01f)); // 0.5초 대기
-            TurnOff();
+    public void CloseUI(int code) {
+        bgf.SetActive(false);
+        window.SetActive(false);
+
+        switch (code) {
+            case 1:
+                title.SetActive(false);
+                playBtn.SetActive(false);
+                itemBtn.SetActive(false);
+                break;
+            case 2:
+                over.SetActive(false);
+                resetBtn.SetActive(false);
+                itemBtn.SetActive(false);
+                break;
+            case 3:     
+                clear.SetActive(false);
+                continueBtn.SetActive(false);
+                resetBtn.SetActive(false);
+                break;
+            case 4:
+                continueBtn.SetActive(false);
+                resetBtn.SetActive(false);
+                exitBtn.SetActive(false);
+                break;
         }
+
+        gr.isGameOver = false;
     }
 
     // 스크립트꺼서 잠시 대기
-    IEnumerator Pause(float seconds) {
+    IEnumerator StopRunning(float seconds) {
         // 원하는 동작 중단
         enabled = false;  // 이 스크립트 자체를 끔
         yield return new WaitForSeconds(seconds);
         enabled = true;   // 다시 켬
     }
 
-
-    void TurnOff() {
-        bgf.SetActive(false);
-        window.SetActive(false);
-
-        title.SetActive(false); 
-        playBtn.SetActive(false);
-        itemBtn.SetActive(false);
-
-        gameObject.SetActive(false);
-        gr.isGameOver = false;
-    }
 }

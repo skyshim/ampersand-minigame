@@ -37,7 +37,9 @@ public class FruitController : MonoBehaviour {
     IEnumerator Pause(float seconds) {
         // 원하는 동작 중단
         enabled = false;  // 이 스크립트 자체를 끔
+        if (gameObject == null) yield break;
         yield return new WaitForSeconds(seconds);
+        if (gameObject == null) yield break;
         enabled = true;   // 다시 켬
     }
 

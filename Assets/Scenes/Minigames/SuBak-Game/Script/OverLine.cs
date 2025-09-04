@@ -14,7 +14,7 @@ public class OverLine : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Fruit")) {
-            gr.isGameOver = true;
+            gr.GameOver();
         }
     }
 }

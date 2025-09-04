@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayBtnScript : MonoBehaviour
+public class MenuBtnScript : MonoBehaviour
 {
     public UnityEvent onClick;
     private UM um;
+    private GameResult gr;
 
-    private bool getInput = true;
+    private bool getInput = false;
 
     void Start() {
         um = FindObjectOfType<UM>();
+        gr = FindObjectOfType<GameResult>();
     }
 
-    private void OnEnable() {
-        getInput = true;
-    }
-    private void OnDisable() {
-        getInput = false;
+    void Update() {
+        if (gr.isGameOver) {
+            getInput = false;
+        } else {
+            getInput = true;
+        }
     }
 
 
@@ -29,7 +32,7 @@ public class PlayBtnScript : MonoBehaviour
     }
 
     public void Onclick() {
+        getInput = false;
         onClick.Invoke();
     }
-
 }

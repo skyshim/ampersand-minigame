@@ -11,17 +11,23 @@ public class GM : MonoBehaviour {
     public bool mergeSig = false;
     public Vector2 mergePos;
     public bool spawnType = false; // true : merge, false : click
-    public float[] fruitDiameter = { 0.3f, 0.6f, 0.9f, 1.2f, 1.5f, 1.8f, 2.1f, 2.4f, 2.7f, 3.0f };
+    public float[] fruitDiameter = { 0.3f, 0.5f, 0.9f, 1.1f, 1.5f, 1.7f, 2.1f, 2.3f, 2.7f, 3.0f };
     public float[] fruitMass = { 0.01f, 0.05f, 0.1f, 0.2f, 0.35f, 0.55f, 0.8f, 1.1f, 1.45f, 1.85f };
 
     private float previousTime;
     private GameResult gr;
-
+    private UM um;
     // Start is called before the first frame update
     void Start() {
+        Screen.SetResolution(1080, 1920, false); // width, height, fullscreen
+        Screen.orientation = ScreenOrientation.Portrait;
+
         mergeLevel = SpawnLevel();
         previousTime = Time.time;
         gr = FindObjectOfType<GameResult>();
+        um = FindObjectOfType<UM>();
+
+        um.OpenUI(1);
     }
 
     // 병합, 게임 끝
@@ -31,6 +37,11 @@ public class GM : MonoBehaviour {
             spawnType = true; // 병합으로 생성
             Instantiate(fruitprefab, mergePos, Quaternion.identity);
             mergeSig = false;
+        }
+
+        if (mergeLevel == 10) {
+            Clear();
+            um.OpenUI(3);
         }
     }
 
