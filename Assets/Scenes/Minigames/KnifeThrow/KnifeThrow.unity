@@ -1031,8 +1031,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.0000019073, y: -112}
-  m_SizeDelta: {x: 323.43, y: 147.81}
+  m_AnchoredPosition: {x: -0.0000038147, y: -137}
+  m_SizeDelta: {x: 428.38, y: 210.12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &945061069
 MonoBehaviour:
@@ -1056,11 +1056,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 8d198fd8db81b464c80bd61955f1b031, type: 3}
-    m_FontSize: 100
+    m_FontSize: 120
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
-    m_MaxSize: 100
+    m_MaxSize: 120
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1426,12 +1426,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 364f7c6a57bb6cd4fb2d20092b72d93e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c77a494a431979b4591420012bbaffbb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.857143, y: 2.857143}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1762,7 +1762,6 @@ MonoBehaviour:
   roundUI: {fileID: 1526957663}
   timer: {fileID: 87680731}
   roundResult: {fileID: 1526957665}
-  firestore: {fileID: 1915949323}
   Knife: {fileID: 7790197485128394744, guid: 122daf74004a2ec4697394ee66a18425, type: 3}
   rounds: []
   knifeHit: 0
@@ -1935,8 +1934,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knifeIconPrefab: {fileID: 3574183262417677866, guid: aaf8a767b3f80e74c8f5b6d43a6f14ef, type: 3}
-  knifeIcon: {fileID: 21300000, guid: eed3b6503d716a2479efab21e2a22000, type: 3}
-  emptyIcon: {fileID: 21300000, guid: f39709cbab1da4541891a29a070431de, type: 3}
+  knifeIcon: {fileID: 21300000, guid: de2793f552c75b94593f7c4008506592, type: 3}
+  emptyIcon: {fileID: 21300000, guid: de2793f552c75b94593f7c4008506592, type: 3}
   knifePanel: {fileID: 1959294980}
 --- !u!114 &1959294983
 MonoBehaviour:

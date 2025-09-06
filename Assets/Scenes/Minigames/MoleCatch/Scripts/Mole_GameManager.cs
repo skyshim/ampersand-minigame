@@ -18,6 +18,7 @@ public class Mole_GameManager : MonoBehaviour
 
     public GameObject countdownObj;
     public GameObject resultObj;
+    public GameObject holes;
     public TMP_Text resultText;
 
     public TMP_Text redScoreText1;
@@ -52,6 +53,7 @@ public class Mole_GameManager : MonoBehaviour
     void Start()
     {
         resultObj.SetActive(false);
+        holes.SetActive(false);
         StartCoroutine(StartCountdown());
     }
 
@@ -70,6 +72,7 @@ public class Mole_GameManager : MonoBehaviour
     {
         gameRunning = true;
         currentTime = gameTime;
+        holes.SetActive(true);
         moleSpawner.StartSpawning();
     }
 
@@ -81,6 +84,7 @@ public class Mole_GameManager : MonoBehaviour
         int blue = Instance.blueScore;
 
         resultObj.SetActive(true);
+        holes.SetActive(false);
 
         if (red > blue)
             resultText.text = "빨간팀 승리!";

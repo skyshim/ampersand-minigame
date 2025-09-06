@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigames/2048/2048.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Minigames/VolleyBall/VolleyBall.unity
+    guid: 4f839fe0ddc7a43418145407a6f9fec6
   m_configObjects: {}

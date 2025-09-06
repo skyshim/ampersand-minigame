@@ -1,7 +1,8 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class Volley_PlayerController : MonoBehaviour
+public class Volley_PlayerMove : MonoBehaviour
 {
     public int playerId = 1; // 1 = 왼쪽, 2 = 오른쪽
     public float moveSpeed = 5f;
@@ -12,10 +13,9 @@ public class Volley_PlayerController : MonoBehaviour
     private bool moveLeft, moveRight, actionPressed;
 
     public LayerMask ballLayer;
-    public float spikeForce = 12f;
+    public float spikeForce = 8f;
+    public float spikeRadius = 1.5f;
     public Transform hitPoint; // 손 위치 같은 Transform
-
-    public TMP_Text actionButtonText;
 
     void Start()
     {
@@ -25,7 +25,7 @@ public class Volley_PlayerController : MonoBehaviour
     void Update()
     {
         HandleKeyboardInput();
-        HandleTouchInput();
+        HandleActionButton();
     }
 
     void LateUpdate()
@@ -50,70 +50,83 @@ public class Volley_PlayerController : MonoBehaviour
     {
         float move = 0f;
 
-        if (playerId == 1) // Player 1 (A,D,W,S)
-        {
-            if (Input.GetKey(KeyCode.A)) move = -1f;
-            if (Input.GetKey(KeyCode.D)) move = 1f;
-
-            if (Input.GetKeyDown(KeyCode.W) && isGrounded)
-                Jump();
-
-            if (Input.GetKeyDown(KeyCode.S))
-                Spike();
-        }
-        else if (playerId == 2) // Player 2 (←,→,↑,↓)
-        {
-            if (Input.GetKey(KeyCode.LeftArrow)) move = -1f;
-            if (Input.GetKey(KeyCode.RightArrow)) move = 1f;
-
-            if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded)
-                Jump();
-
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-                Spike();
-        }
-
         if (moveLeft) move = -1;
         if (moveRight) move = 1;
-        if (actionPressed)
-        {
-            if (isGrounded) Jump();
-            else Spike();
-            actionPressed = false;
-        }
-
-        if (actionButtonText != null)
-        {
-            if (isGrounded) actionButtonText.text = "↑";   // 점프
-            else actionButtonText.text = "* ";             // 스파이크
-        }
 
         rb.velocity = new Vector2(move * moveSpeed, rb.velocity.y);
     }
 
-    void HandleTouchInput()
+    public bool GroundCheck()
     {
-        if (Input.touchCount <= 0) return;
+        return isGrounded;
+    }
 
-        foreach (Touch touch in Input.touches)
+    void HandleActionButton()
+    {
+        if (actionPressed)
         {
-            // 왼쪽/오른쪽 화면 나누기
-            bool isMySide = (playerId == 1 && touch.position.x < Screen.width / 2) ||
-                            (playerId == 2 && touch.position.x >= Screen.width / 2);
-
-            if (!isMySide) continue;
-
-            if (touch.phase == TouchPhase.Began)
+            if (isGrounded)
             {
-                // 간단하게: 탭 = 점프
                 Jump();
             }
-            else if (touch.phase == TouchPhase.Moved)
+            else
             {
-                // 드래그 방향으로 이동
-                float dir = touch.deltaPosition.x;
-                rb.velocity = new Vector2(Mathf.Sign(dir) * moveSpeed, rb.velocity.y);
+                TrySpike();
             }
+        }
+    }
+
+    void TrySpike()
+    {
+        // 범위 내 공 찾기
+        Collider2D ball = Physics2D.OverlapCircle(hitPoint.position, spikeRadius, ballLayer);
+
+        if (ball != null)
+        {
+            Rigidbody2D ballRb = ball.GetComponent<Rigidbody2D>();
+            if (ballRb != null)
+            {
+                PerformSpike(ballRb);
+            }
+        }
+    }
+
+    void PerformSpike(Rigidbody2D ballRb)
+    {
+        // 스파이크 방향 계산
+        Vector2 spikeDirection = (ballRb.transform.position - transform.position).normalized;
+
+        // 공에 강한 힘 가하기
+        ballRb.velocity = Vector2.zero; // 기존 속도 리셋
+        ballRb.AddForce(spikeDirection * spikeForce, ForceMode2D.Impulse);
+
+        // 잠시 물리 재질 변경으로 강한 반발력 추가
+        StartCoroutine(ApplySpikeBounce(ballRb));
+    }
+
+    private IEnumerator ApplySpikeBounce(Rigidbody2D ballRb)
+    {
+        Collider2D ballCollider = ballRb.GetComponent<Collider2D>();
+        if (ballCollider == null) yield break;
+
+        PhysicsMaterial2D originalMat = ballCollider.sharedMaterial;
+
+        // 임시 물리 재질 생성
+        PhysicsMaterial2D spikeMat = new PhysicsMaterial2D("SpikeMaterial");
+        spikeMat.bounciness = 0.9f;
+        spikeMat.friction = 0.1f;
+
+        ballCollider.sharedMaterial = spikeMat;
+
+        // 0.2초 후 원래 재질로 복구
+        yield return new WaitForSeconds(0.2f);
+
+        ballCollider.sharedMaterial = originalMat;
+
+        // 임시 재질 정리
+        if (spikeMat != null)
+        {
+            DestroyImmediate(spikeMat);
         }
     }
 
@@ -123,29 +136,6 @@ public class Volley_PlayerController : MonoBehaviour
         isGrounded = false;
     }
 
-    void Spike()
-    {
-        Debug.Log($"Player {playerId} Spike!");
-        Collider2D ball = Physics2D.OverlapCircle(hitPoint.position, 1f, ballLayer);
-        if (ball != null)
-        {
-            Rigidbody2D rb = ball.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                // "손 → 공" 벡터 방향
-                Vector2 dir = (rb.position - (Vector2)hitPoint.position).normalized;
-
-                // 기존 속도 초기화
-                rb.velocity = Vector2.zero;
-
-                // 해당 방향으로 강하게 밀기
-                float spikePower = 8f; // 힘 크기 (튜닝 가능)
-                rb.AddForce(dir * spikePower, ForceMode2D.Impulse);
-
-                Debug.Log($"Spike! 방향 = {dir}, 힘 = {spikePower}");
-            }
-        }
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -158,5 +148,6 @@ public class Volley_PlayerController : MonoBehaviour
     public void OnMoveLeftUp() { moveLeft = false; }
     public void OnMoveRightDown() { moveRight = true; }
     public void OnMoveRightUp() { moveRight = false; }
-    public void OnActionButton() { actionPressed = true; }
+    public void OnActionButtonDown() { actionPressed = true; }
+    public void OnActionButtonUp() { actionPressed = false; }
 }
