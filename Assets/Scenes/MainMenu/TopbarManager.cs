@@ -15,7 +15,6 @@ public class TopbarManager : MonoBehaviour
     {
         Debug.Log("랭킹 버튼 클릭");
         // 랭킹 화면 열기
-        AllUIManager.Instance.ShowRankingPanel();
     }
 
     public void OnExitClicked()

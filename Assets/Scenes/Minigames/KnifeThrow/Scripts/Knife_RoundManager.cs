@@ -196,11 +196,11 @@ public class Knife_RoundManager : MonoBehaviour
     {
         int finalScore = roundUI.LoadScore();
         string playerName = "Guest";
-        var user = RankingManager.Instance.auth.CurrentUser;
-        if (user != null)
-            playerName = user.DisplayName ?? "Guest";
+        //var user = RankingManager.Instance.auth.CurrentUser;
+        //if (user != null)
+        //    playerName = user.DisplayName ?? "Guest";
 
-        RankingManager.Instance.AddNewRecord("knife", playerName, finalScore, false);
+        //RankingManager.Instance.AddNewRecord("knife", playerName, finalScore, false);
         StartCoroutine(RoundFailDelay());
     }
 
