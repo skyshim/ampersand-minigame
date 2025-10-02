@@ -7,7 +7,6 @@ public class MenuManager : MonoBehaviour
     public GameObject popupPanel;
     public TMP_Text popupTitleText;
     public TMP_Text popupDescriptionText;
-    public TMP_Text rankingInfoText;
     public Button confirmButton;
     public Button xButton;
 
@@ -31,7 +30,6 @@ public class MenuManager : MonoBehaviour
     {
         popupTitleText.text = title;
         popupDescriptionText.text = description;
-        rankingInfoText.text = hasRanking ? "·©Å· Áö¿ø" : "·©Å· ¾øÀ½";
 
         nextSceneName = sceneName;
         popupPanel.SetActive(true);

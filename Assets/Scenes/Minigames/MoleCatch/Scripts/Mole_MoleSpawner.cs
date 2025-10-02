@@ -131,6 +131,7 @@ public class Mole_MoleSpawner : MonoBehaviour
 
         // 두더지 생성
         GameObject mole = Instantiate(selectedPrefab, spawnPoint.position, Quaternion.identity);
+        Debug.Log("Spawned: " + mole.name + " at " + spawnPoint.name);
 
         // 타입 설정 (prefab에 이미 설정되어 있다면 이 부분 제거 가능)
         Mole_Mole moleScript = mole.GetComponent<Mole_Mole>();
@@ -148,6 +149,7 @@ public class Mole_MoleSpawner : MonoBehaviour
         // 구멍 점유 상태 관리
         holeOccupied[randomIndex] = true;
         StartCoroutine(ReleaseHoleAfterDelay(randomIndex, 1.0f));
+        Debug.Log(moleIndex);
 
         // 두더지 자동 제거
         Destroy(mole, 1.0f);

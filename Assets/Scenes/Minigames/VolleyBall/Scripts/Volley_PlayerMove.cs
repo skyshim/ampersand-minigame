@@ -8,11 +8,14 @@ public class Volley_PlayerMove : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 7f;
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
+    Animator animator;
     private bool isGrounded = true;
 
     private bool moveLeft, moveRight, actionPressed;
 
     public LayerMask ballLayer;
+    
     public float spikeForce = 8f;
     public float spikeRadius = 1.5f;
     public Transform hitPoint; // 손 위치 같은 Transform
@@ -20,12 +23,13 @@ public class Volley_PlayerMove : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
     {
         HandleKeyboardInput();
-        HandleActionButton();
     }
 
     void LateUpdate()
@@ -54,6 +58,8 @@ public class Volley_PlayerMove : MonoBehaviour
         if (moveRight) move = 1;
 
         rb.velocity = new Vector2(move * moveSpeed, rb.velocity.y);
+        if (move > 0) sr.flipX = true;
+        if (move < 0) sr.flipX = false;
     }
 
     public bool GroundCheck()
@@ -61,23 +67,22 @@ public class Volley_PlayerMove : MonoBehaviour
         return isGrounded;
     }
 
-    void HandleActionButton()
+    public void OnActionButtonClick()
     {
-        if (actionPressed)
+        if (isGrounded)
         {
-            if (isGrounded)
-            {
-                Jump();
-            }
-            else
-            {
-                TrySpike();
-            }
+            Jump();
+        }
+        else
+        {
+            TrySpike();
         }
     }
 
     void TrySpike()
     {
+        Debug.Log("스파이크 시도");
+        animator.SetTrigger("OnSpike");
         // 범위 내 공 찾기
         Collider2D ball = Physics2D.OverlapCircle(hitPoint.position, spikeRadius, ballLayer);
 
@@ -100,6 +105,8 @@ public class Volley_PlayerMove : MonoBehaviour
         ballRb.velocity = Vector2.zero; // 기존 속도 리셋
         ballRb.AddForce(spikeDirection * spikeForce, ForceMode2D.Impulse);
 
+        
+
         // 잠시 물리 재질 변경으로 강한 반발력 추가
         StartCoroutine(ApplySpikeBounce(ballRb));
     }
@@ -113,7 +120,7 @@ public class Volley_PlayerMove : MonoBehaviour
 
         // 임시 물리 재질 생성
         PhysicsMaterial2D spikeMat = new PhysicsMaterial2D("SpikeMaterial");
-        spikeMat.bounciness = 0.9f;
+        spikeMat.bounciness = 0.8f;
         spikeMat.friction = 0.1f;
 
         ballCollider.sharedMaterial = spikeMat;
@@ -134,6 +141,7 @@ public class Volley_PlayerMove : MonoBehaviour
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         isGrounded = false;
+        animator.SetTrigger("OnJump");
     }
 
 
@@ -141,6 +149,7 @@ public class Volley_PlayerMove : MonoBehaviour
     {
         if (collision.contacts[0].normal.y > 0.5f)
             isGrounded = true;
+            animator.SetTrigger("OnGround");
     }
 
 
@@ -148,6 +157,4 @@ public class Volley_PlayerMove : MonoBehaviour
     public void OnMoveLeftUp() { moveLeft = false; }
     public void OnMoveRightDown() { moveRight = true; }
     public void OnMoveRightUp() { moveRight = false; }
-    public void OnActionButtonDown() { actionPressed = true; }
-    public void OnActionButtonUp() { actionPressed = false; }
 }
