@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GM : MonoBehaviour {
 
+    public bool isItemMode = false;
     public GameObject fruitprefab;
     public int mergeLevel = 1;
 

@@ -21,7 +21,6 @@ public class UM : MonoBehaviour
     [SerializeField] private GameObject itemBtn;
     [SerializeField] private GameObject exitBtn;
 
-
     void Start() {
         gr = FindObjectOfType<GameResult>();
     }
