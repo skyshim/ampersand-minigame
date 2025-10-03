@@ -1918,7 +1918,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -440.33997, y: -50.169983}
+  m_AnchoredPosition: {x: -440.34003, y: -50.16992}
   m_SizeDelta: {x: -909.28, y: -200.43}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1959294981
@@ -1935,7 +1935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knifeIconPrefab: {fileID: 3574183262417677866, guid: aaf8a767b3f80e74c8f5b6d43a6f14ef, type: 3}
   knifeIcon: {fileID: 21300000, guid: de2793f552c75b94593f7c4008506592, type: 3}
-  emptyIcon: {fileID: 21300000, guid: de2793f552c75b94593f7c4008506592, type: 3}
+  emptyIcon: {fileID: 21300000, guid: 9bcce40d95146044cabf9a2b20b1dc75, type: 3}
   knifePanel: {fileID: 1959294980}
 --- !u!114 &1959294983
 MonoBehaviour:
