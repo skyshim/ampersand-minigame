@@ -51,19 +51,22 @@ public class Hand : MonoBehaviour {
 
     // 과일 랜덤 생성
     private void Spawn() {
-            formerclick = Time.time;
+        formerclick = Time.time;
 
-            spawnLevel = nextSpawnLevel;
-            int r = Random.Range(1, 7);
-            if (r <= 3) nextSpawnLevel = 1;
-            else if (r <= 5) nextSpawnLevel = 2;
-            else nextSpawnLevel = 3;
+        spawnLevel = nextSpawnLevel;
+        int r = Random.Range(1, 25);
+        if (r <= 6) nextSpawnLevel = 1;
+        else if (r <= 12) nextSpawnLevel = 2;
+        else if (r <= 18) nextSpawnLevel = 3;
+        else if (r == 22) nextSpawnLevel = 4;
+        else nextSpawnLevel = 5;
 
-            spawnPoint.SetActive(false);
-            Invoke("SizeChange", clickDelay);
+        spawnPoint.SetActive(false);
+        Invoke("SizeChange", clickDelay);
 
-            gm.spawnType = false; // 클릭으로 생성
-            Instantiate(fruitPrefab, spawnPoint.transform.position, transform.rotation); // 이후 과일 생성
+        gm.spawnType = false; // 클릭으로 생성
+        Instantiate(fruitPrefab, spawnPoint.transform.position, transform.rotation); // 이후 과일 생성
+        gm.GetScore(spawnLevel);
     }
 
 
@@ -81,5 +84,6 @@ public class Hand : MonoBehaviour {
         spawnPoint.transform.localScale = new Vector3(gm.fruitDiameter[spawnLevel - 1], gm.fruitDiameter[spawnLevel - 1], 1);
         transform.position = new Vector2(0, transform.position.y);
     }
+
 }
 

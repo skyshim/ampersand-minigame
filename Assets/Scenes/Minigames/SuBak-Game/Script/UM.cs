@@ -34,12 +34,12 @@ public class UM : MonoBehaviour
             case 1: // 초기
                 title.SetActive(true);
                 playBtn.SetActive(true);
-                itemBtn.SetActive(true);
+                //itemBtn.SetActive(true);
                 break;
             case 2: // 게임오버
                 over.SetActive(true);
                 resetBtn.SetActive(true);
-                itemBtn.SetActive(true);
+                //itemBtn.SetActive(true);
                 break;
             case 3: // 클리어
                 clear.SetActive(true);
@@ -57,32 +57,18 @@ public class UM : MonoBehaviour
     }
 
 
-    public void CloseUI(int code) {
+    public void CloseUI() {
         bgf.SetActive(false);
         window.SetActive(false);
 
-        switch (code) {
-            case 1:
-                title.SetActive(false);
-                playBtn.SetActive(false);
-                itemBtn.SetActive(false);
-                break;
-            case 2:
-                over.SetActive(false);
-                resetBtn.SetActive(false);
-                itemBtn.SetActive(false);
-                break;
-            case 3:     
-                clear.SetActive(false);
-                continueBtn.SetActive(false);
-                resetBtn.SetActive(false);
-                break;
-            case 4:
-                continueBtn.SetActive(false);
-                resetBtn.SetActive(false);
-                exitBtn.SetActive(false);
-                break;
-        }
+        title.SetActive(false);
+        over.SetActive(false);
+        clear.SetActive(false);
+        resetBtn.SetActive(false);
+        continueBtn.SetActive(false);
+        playBtn.SetActive(false);
+        //itemBtn.SetActive(false);
+        exitBtn.SetActive(false);
 
         gr.isGameOver = false;
     }

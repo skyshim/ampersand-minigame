@@ -31,4 +31,5 @@ public class ItemBtnScript : MonoBehaviour
     public void Onclick() {
         onClick.Invoke();
     }
+
 }

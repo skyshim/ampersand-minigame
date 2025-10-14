@@ -14,17 +14,19 @@ public class GM : MonoBehaviour {
     public bool spawnType = false; // true : merge, false : click
     public float[] fruitDiameter = { 0.3f, 0.5f, 0.9f, 1.1f, 1.5f, 1.7f, 2.1f, 2.3f, 2.7f, 3.0f };
     public float[] fruitMass = { 0.01f, 0.05f, 0.1f, 0.2f, 0.35f, 0.55f, 0.8f, 1.1f, 1.45f, 1.85f };
+    public int[] fruitScore = { 100, 400, 900, 1600, 2500, 3600, 4900, 6400, 8100, 10000 }; // 레벨별 점수
+    public int score;
 
-    private float previousTime;
     private GameResult gr;
     private UM um;
+
+
     // Start is called before the first frame update
     void Start() {
         Screen.SetResolution(1080, 1920, false); // width, height, fullscreen
         Screen.orientation = ScreenOrientation.Portrait;
 
         mergeLevel = SpawnLevel();
-        previousTime = Time.time;
         gr = FindObjectOfType<GameResult>();
         um = FindObjectOfType<UM>();
 
@@ -37,12 +39,14 @@ public class GM : MonoBehaviour {
         if (mergeSig) {
             spawnType = true; // 병합으로 생성
             Instantiate(fruitprefab, mergePos, Quaternion.identity);
+            GetScore(mergeLevel);
             mergeSig = false;
         }
 
         if (mergeLevel == 10) {
-            Clear();
-            um.OpenUI(3);
+            gr.isGameOver = true;
+            gr.isGameClear = true;
+            um.OpenUI(3);   
         }
     }
 
@@ -55,8 +59,8 @@ public class GM : MonoBehaviour {
         else return 3;
     }
 
-    public void Clear() {
-        gr.isGameOver = true;
-        
+    public void GetScore(int level) {
+        score += fruitScore[level - 1];
+        Debug.Log("Score : " + score);
     }
 }

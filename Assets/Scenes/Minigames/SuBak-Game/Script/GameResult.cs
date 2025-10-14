@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameResult : MonoBehaviour
 {
     public bool isGameOver = false;
+    public bool isGameClear = false;
 
     private GM gm;
     private UM um;
@@ -23,6 +24,7 @@ public class GameResult : MonoBehaviour
 
     public void ResetGame() {
         if (!isGameOver) return;
+        if (isGameClear) isGameClear = false;
 
         isGameOver = false;
 

@@ -8,20 +8,18 @@ public class BM : MonoBehaviour
     private UM um;
     private GameResult gr;
     private GM gm;
-    private Renderer rend;
-    [SerializeField] private GameObject itemToggle;
-    [SerializeField] private GameObject itemBack;
+    [SerializeField] private GameObject ItemOn;
+    [SerializeField] private GameObject ItemOff;
 
     void Start() {
         um = FindObjectOfType<UM>();
         gr = FindObjectOfType<GameResult>();
         gm = FindObjectOfType<GM>();
-        rend = GetComponent<Renderer>();
     }
 
 
     public void ClickPlayBtn() {
-        um.CloseUI(1);
+        um.CloseUI();
     }
 
     public void ClickMenuBtn() {
@@ -29,29 +27,34 @@ public class BM : MonoBehaviour
     }
     
     public void ClickContinueBtn() {
-        um.CloseUI(4);
+        um.CloseUI();
+        if (gr.isGameClear) {
+            gr.isGameOver = false;
+        }
     }
 
     public void ClickResetBtn() {
         gr.ResetGame();
         StartCoroutine(StopRunning(0.01f)); // 0.5초 동안 동작 중단
-        um.CloseUI(4);
-        um.CloseUI(2);
-        um.CloseUI(1);
+        um.CloseUI();
     }
 
     public void ClickExitBtn() {
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void ClickItemBtn() {
-        if (gm.isItemMode) {
-            rend.material.color = new Color(234, 56, 17, 255);
-        }
-        else {
-            rend.material.color = new Color(29, 193, 36, 255);
-        }
-    }
+    //public void ClickItemBtn() {
+    //    if (gm.isItemMode) {
+    //        gm.isItemMode = false;
+    //        ItemOff.SetActive(true);
+    //        ItemOn.SetActive(false);
+    //    }
+    //    else {
+    //        gm.isItemMode = true;
+    //        ItemOff.SetActive(false);
+    //        ItemOn.SetActive(true);
+    //    }
+    //}
 
     IEnumerator StopRunning(float seconds) {
         // 원하는 동작 중단

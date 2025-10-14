@@ -11,6 +11,7 @@ public class FruitController : MonoBehaviour {
 
     public int fruitLevel = 1; // 1~10
     private float spawnTime; // 생성시점
+    float stayTime = 0f;
 
 
     private void Start() {
@@ -30,6 +31,7 @@ public class FruitController : MonoBehaviour {
         gameObject.transform.localScale = new Vector3(gm.fruitDiameter[fruitLevel - 1], gm.fruitDiameter[fruitLevel - 1], 1);
         rb.mass = gm.fruitMass[fruitLevel - 1];
         spawnTime = Time.time;
+        Pause(0.1f);
     }
 
 
@@ -49,10 +51,6 @@ public class FruitController : MonoBehaviour {
         if (gr.isGameOver) {
             rb.simulated = false;
         } else { rb.simulated = true;}
-
-        if (fruitLevel == 10) {
-            gm.Clear();
-        }
     }
 
     // 과일끼리 충돌시 병합
@@ -62,7 +60,7 @@ public class FruitController : MonoBehaviour {
             StartCoroutine(Pause(hand.mergeDelay));
             StartCoroutine(collision.gameObject.GetComponent<FruitController>().Pause(hand.mergeDelay));
         }
-        if (fruitLevel == collision.gameObject.GetComponent<FruitController>().fruitLevel) {
+        if (fruitLevel == collision.gameObject.GetComponent<FruitController>().fruitLevel && fruitLevel != 10) {
             gm.mergeSig = true;
             gm.mergeLevel = fruitLevel + 1;
 
@@ -75,5 +73,19 @@ public class FruitController : MonoBehaviour {
 
     }
 
+    private void OnTriggerStay2D(Collider2D collision) {
+        if (collision.gameObject.CompareTag("Overline_Subak-Game")) {
+            stayTime += Time.deltaTime;
+        }
 
+        if (stayTime >= 1f) {
+            gr.GameOver();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision) {
+        if (collision.gameObject.CompareTag("Overline_Subak-Game")) {
+            stayTime = 0f;
+        }
+    }
 }
