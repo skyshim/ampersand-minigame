@@ -7,7 +7,7 @@ public class GameResult : MonoBehaviour
     public bool isGameOver = false;
     public bool isGameClear = false;
 
-    private GM gm;
+    private ScoreViewer sv;
     private UM um;
     private Hand hand;
     public int score = 0;
@@ -16,9 +16,9 @@ public class GameResult : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gm = FindObjectOfType<GM>();
         hand = FindObjectOfType<Hand>();
         um = FindObjectOfType<UM>();
+        sv = FindObjectOfType<ScoreViewer>();
     }
 
 
@@ -33,13 +33,20 @@ public class GameResult : MonoBehaviour
             Destroy(fruit);
         }
 
+        sv.ResetScore();
         hand.ResetGame();
     }
 
     public void GameOver() {
         isGameOver = true;
         um.OpenUI(2);
+        sv.FinalScore();
     }
 
-
+    public void GameClear() {
+        isGameClear = true;
+        isGameOver = true;
+        um.OpenUI(3);
+        sv.FinalScore();
+    }
 }

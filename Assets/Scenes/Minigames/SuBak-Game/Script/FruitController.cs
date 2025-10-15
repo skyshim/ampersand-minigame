@@ -73,19 +73,29 @@ public class FruitController : MonoBehaviour {
 
     }
 
+    float x, y;
     private void OnTriggerStay2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Overline_Subak-Game")) {
             stayTime += Time.deltaTime;
         }
 
-        if (stayTime >= 1f) {
-            gr.GameOver();
+        if (stayTime >= 0.74f && stayTime <= 0.76f) {
+            x = transform.position.x;
+            y = transform.position.y;
+        }
+        else if (stayTime >= 1f) {
+            float a = x - transform.position.x, b = y - transform.position.y;
+            if (a * a + b * b >= 0.025f) {
+                gr.GameOver();
+            }
+
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Overline_Subak-Game")) {
             stayTime = 0f;
+            x = 0; y = 0;
         }
     }
 }

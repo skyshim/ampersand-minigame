@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class UM : MonoBehaviour
@@ -20,6 +18,7 @@ public class UM : MonoBehaviour
     [SerializeField] private GameObject playBtn;
     [SerializeField] private GameObject itemBtn;
     [SerializeField] private GameObject exitBtn;
+    [SerializeField] private UnityEngine.UI.Text FinalText;
 
     void Start() {
         gr = FindObjectOfType<GameResult>();
@@ -40,11 +39,13 @@ public class UM : MonoBehaviour
                 over.SetActive(true);
                 resetBtn.SetActive(true);
                 //itemBtn.SetActive(true);
+                FTOnOff(1);
                 break;
             case 3: // 클리어
                 clear.SetActive(true);
                 continueBtn.SetActive(true);
                 resetBtn.SetActive(true);
+                FTOnOff(1);
                 break;
             case 4: // 메뉴
                 continueBtn.SetActive(true);
@@ -69,16 +70,23 @@ public class UM : MonoBehaviour
         playBtn.SetActive(false);
         //itemBtn.SetActive(false);
         exitBtn.SetActive(false);
+        FTOnOff(0);
 
         gr.isGameOver = false;
     }
 
-    // 스크립트꺼서 잠시 대기
-    IEnumerator StopRunning(float seconds) {
-        // 원하는 동작 중단
-        enabled = false;  // 이 스크립트 자체를 끔
-        yield return new WaitForSeconds(seconds);
-        enabled = true;   // 다시 켬
+
+    public void FTOnOff(int tf) {
+        if (tf == 1) {
+            Color color = FinalText.color;
+            color.a = 1f;
+            FinalText.color = color;
+        }
+        else if (tf == 0) {
+            Color color = FinalText.color;
+            color.a = 0f;
+            FinalText.color = color;
+        }
     }
 
 }
