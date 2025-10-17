@@ -12,6 +12,7 @@ TagManager:
   - Volley_Ground
   - Fruit_SuBak-Game
   - Overline_Subak-Game
+  - DogeOuterwall
   layers:
   - Default
   - TransparentFX

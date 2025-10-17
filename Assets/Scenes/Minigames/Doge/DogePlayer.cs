@@ -6,7 +6,7 @@ public class DogePlayer : MonoBehaviour
 {
     private float doge_horizontal;
     private float doge_vertical;
-    private float doge_speed = 50f;
+    private float doge_speed = 150f;
 
     private Rigidbody2D rb;
 
