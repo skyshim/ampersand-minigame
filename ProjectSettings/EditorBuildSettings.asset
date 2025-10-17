@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigames/1to50/1to50.unity
     guid: e4fc8b3e002a2a04296bc5b58eaa5607
+  - enabled: 1
+    path: Assets/Scenes/Minigames/DinoJump/DinoJump.unity
+    guid: 18981b193d053e14bb66ef2cb482d53a
   m_configObjects: {}
