@@ -195,7 +195,6 @@ public class Knife_RoundManager : MonoBehaviour
     public void RoundFail()
     {
         int finalScore = roundUI.LoadScore();
-        string playerName = "Guest";
         //var user = RankingManager.Instance.auth.CurrentUser;
         //if (user != null)
         //    playerName = user.DisplayName ?? "Guest";

@@ -28,6 +28,8 @@ public class Volley_GameManager : MonoBehaviour
 
     void Start()
     {
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+
         retryButton.onClick.AddListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name));
         homeButton.onClick.AddListener(() => SceneManager.LoadScene("MainMenu")); // 메인 메뉴 씬 이름 확인
 
