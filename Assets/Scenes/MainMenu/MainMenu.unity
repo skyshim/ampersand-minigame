@@ -2077,7 +2077,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1629026635483733102, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
       propertyPath: m_Text
-      value: "2\uC778\uBC30\uAD6C\n"
+      value: "2\uC778\uBC30\uAD6C"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629026635483733102, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3866857511900269864, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 314.711
+      objectReference: {fileID: 0}
+    - target: {fileID: 3866857511900269864, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 94.8175
+      objectReference: {fileID: 0}
+    - target: {fileID: 3866857511900269864, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 7.356
+      objectReference: {fileID: 0}
+    - target: {fileID: 3866857511900269864, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -152.59
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2636,6 +2656,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 702733790}
     m_Modifications:
+    - target: {fileID: 346124625021997979, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f099f5a831f783c429d815e664862f7a, type: 3}
     - target: {fileID: 400554344420560300, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2722,7 +2746,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1421794651374548514, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
       propertyPath: title
-      value: 
+      value: "\uB625\uD53C\uD558\uAE30"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1421794651374548514, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
+      propertyPath: sceneName
+      value: poopDodge
+      objectReference: {fileID: 0}
+    - target: {fileID: 1421794651374548514, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
+      propertyPath: description
+      value: "\uD558\uB298\uC5D0\uC11C \uB0B4\uB824\uC624\uB294 \uB625\uC744 \uC88C\uC6B0\uB85C
+        \uD53C\uD558\uB294 \uAC8C\uC784\uC785\uB2C8\uB2E4! (\uB450\uBA85\uC774\uC11C\uB3C4
+        \uAC00\uB2A5\uD55C \uAC8C\uC784\uC785\uB2C8\uB2E4)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1629026635483733102, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
+      propertyPath: m_Text
+      value: "\uB625\uD53C\uD558\uAE30"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
