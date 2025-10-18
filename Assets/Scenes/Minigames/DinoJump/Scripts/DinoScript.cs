@@ -8,6 +8,7 @@ public class DinoScript : MonoBehaviour
 {
     public Rigidbody2D rb;
     public GameObject manager;
+    public DinoJumpManagerScript managerScript;
     private SpriteRenderer sr;
     private PolygonCollider2D pc;
 
@@ -18,6 +19,7 @@ public class DinoScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        managerScript = GetComponent<DinoJumpManagerScript>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         pc = GetComponent<PolygonCollider2D>();
@@ -38,7 +40,7 @@ public class DinoScript : MonoBehaviour
     {
         DinoJumpManagerScript managerScript = manager.GetComponent<DinoJumpManagerScript>();
 
-        if (!managerScript.isGameovered && managerScript.isGamestarted) 
+        if (!managerScript.isGameovered && managerScript.isGamestarted && rb.position.y > -5)
         {
             if (Input.touchCount > 0)
             {
@@ -49,7 +51,6 @@ public class DinoScript : MonoBehaviour
             }
             if (Input.GetMouseButton(0))
             {
-                //Debug.Log("마우스클릭함");
                 jump();
 
                 rb.gravityScale = Input.GetMouseButton(0) ? reducedG : normalG;
@@ -57,6 +58,7 @@ public class DinoScript : MonoBehaviour
             else
                 rb.gravityScale = normalG;
         }
+        else if (rb.position.y < -5) managerScript.isGameovered = true;
         else { rb.velocity = new Vector2(0, 0); }
     }
 

@@ -12,10 +12,14 @@ TagManager:
   - Volley_Ground
   - Fruit_SuBak-Game
   - Overline_Subak-Game
+<<<<<<< HEAD
   - bullet-p_1945
   - bullet-e_1945
   - boundary_1945
   - enemy_1945
+=======
+  - DogeOuterwall
+>>>>>>> f83156928f99261988faf7e12cadbe43543d0cb8
   layers:
   - Default
   - TransparentFX

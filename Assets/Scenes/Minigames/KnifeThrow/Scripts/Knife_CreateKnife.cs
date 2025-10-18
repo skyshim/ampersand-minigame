@@ -23,10 +23,6 @@ public class Knife_CreateKnife : MonoBehaviour
     {
         if (!isReadyToThrow) return;
 
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            ThrowSelf();
-        }
         if (Input.GetMouseButtonDown(0))
         {
             ThrowSelf();

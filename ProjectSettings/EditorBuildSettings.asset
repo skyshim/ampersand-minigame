@@ -26,4 +26,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigames/VolleyBall/VolleyBall.unity
     guid: 4f839fe0ddc7a43418145407a6f9fec6
+  - enabled: 1
+    path: Assets/Scenes/Minigames/SuBak-Game/SuBak-Game.unity
+    guid: df7d6575c7309bd418eb775688f5d930
+  - enabled: 1
+    path: Assets/Scenes/Minigames/1to50/1to50.unity
+    guid: e4fc8b3e002a2a04296bc5b58eaa5607
+  - enabled: 1
+    path: Assets/Scenes/Minigames/DinoJump/DinoJump.unity
+    guid: 18981b193d053e14bb66ef2cb482d53a
+  - enabled: 1
+    path: Assets/Scenes/Minigames/poopDodge/poopDodge.unity
+    guid: 8f6d3ea55f7966a45932d964cda04ca0
   m_configObjects: {}
