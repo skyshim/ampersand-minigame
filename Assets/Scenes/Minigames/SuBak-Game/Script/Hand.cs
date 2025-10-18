@@ -9,6 +9,7 @@ public class Hand : MonoBehaviour {
     private float formerclick;
     public float clickDelay = 0.1f; // 클릭 딜레이
     public float mergeDelay;
+    public bool dropSig = false;
 
     public GameObject fruitPrefab;
     public GameObject spawnPoint;
@@ -62,7 +63,10 @@ public class Hand : MonoBehaviour {
         else nextSpawnLevel = 5;
 
         spawnPoint.SetActive(false);
+        dropSig = true;
         Invoke("SizeChange", clickDelay);
+
+
 
         gm.spawnType = false; // 클릭으로 생성
         Instantiate(fruitPrefab, spawnPoint.transform.position, transform.rotation); // 이후 과일 생성
@@ -72,6 +76,7 @@ public class Hand : MonoBehaviour {
 
     // 다음 떨굴거 보여주기
     private void SizeChange() {
+        dropSig = false;
         spawnPoint.SetActive(true);
         spawnPoint.transform.localScale = new Vector3(gm.fruitDiameter[nextSpawnLevel - 1], gm.fruitDiameter[nextSpawnLevel - 1], 1);
     }
@@ -83,6 +88,7 @@ public class Hand : MonoBehaviour {
         nextSpawnLevel = 1;
         spawnPoint.transform.localScale = new Vector3(gm.fruitDiameter[spawnLevel - 1], gm.fruitDiameter[spawnLevel - 1], 1);
         transform.position = new Vector2(0, transform.position.y);
+        gm.score = 0;
     }
 
 }

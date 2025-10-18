@@ -12,6 +12,10 @@ TagManager:
   - Volley_Ground
   - Fruit_SuBak-Game
   - Overline_Subak-Game
+  - bullet-p_1945
+  - bullet-e_1945
+  - boundary_1945
+  - enemy_1945
   layers:
   - Default
   - TransparentFX
