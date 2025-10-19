@@ -458,8 +458,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0.0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 947c8970455f907448ef80d2c254bfff, type: 2}
-  m_sharedMaterial: {fileID: 2790341690525929915, guid: 947c8970455f907448ef80d2c254bfff, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3bda39263f00962468cf0917cd04acdc, type: 2}
+  m_sharedMaterial: {fileID: -6181544432235409014, guid: 3bda39263f00962468cf0917cd04acdc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -606,8 +606,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 3
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 947c8970455f907448ef80d2c254bfff, type: 2}
-  m_sharedMaterial: {fileID: 2790341690525929915, guid: 947c8970455f907448ef80d2c254bfff, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3bda39263f00962468cf0917cd04acdc, type: 2}
+  m_sharedMaterial: {fileID: -6181544432235409014, guid: 3bda39263f00962468cf0917cd04acdc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -904,7 +904,6 @@ GameObject:
   - component: {fileID: 600090386}
   - component: {fileID: 600090385}
   - component: {fileID: 600090384}
-  - component: {fileID: 600090387}
   m_Layer: 5
   m_Name: Grid
   m_TagString: Untagged
@@ -993,28 +992,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 600090382}
   m_CullTransparentMesh: 1
---- !u!114 &600090387
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 600090382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cb376c48b5fc4f4dbb38d3e5a2667ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonPrefab: {fileID: 8410284452553421661, guid: 8e5f7de1c1cca8d489a4a78beb2c43f9, type: 3}
-  buttonParent: {fileID: 600090383}
-  timer: {fileID: 0}
-  endPanel: {fileID: 0}
-  startPanel: {fileID: 0}
-  countdownText: {fileID: 0}
-  buttons: []
-  texts: []
-  currentNumber: 1
-  isStarted: 0
 --- !u!1 &1236324460
 GameObject:
   m_ObjectHideFlags: 0
