@@ -7,7 +7,7 @@ public class GameButton : MonoBehaviour
     [TextArea]
     public string description;       // 팝업 본문
     public string sceneName;         // 전환할 씬 이름
-    public bool hasRanking;          // 랭킹 유무
+    public Sprite ingameImage;
 
     private Button button;
     private MenuManager menuManager;
@@ -26,6 +26,6 @@ public class GameButton : MonoBehaviour
     private void OnClick()
     {
         // 메뉴 매니저에 정보 전달
-        menuManager.ShowPopup(title, description, sceneName, hasRanking);
+        menuManager.ShowPopup(title, description, sceneName, ingameImage);
     }
 }
