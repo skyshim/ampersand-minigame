@@ -8,6 +8,7 @@ public class FruitController : MonoBehaviour {
     private GM gm;
     private Hand hand;
     private GameResult gr;
+    [SerializeField] Animator drawing;
 
     public int fruitLevel = 1; // 1~10
     private float spawnTime; // 생성시점
@@ -28,10 +29,12 @@ public class FruitController : MonoBehaviour {
         else { // 클릭으로 생성
             fruitLevel = hand.spawnLevel;
         }
-        gameObject.transform.localScale = new Vector3(gm.fruitDiameter[fruitLevel - 1], gm.fruitDiameter[fruitLevel - 1], 1);
         rb.mass = gm.fruitMass[fruitLevel - 1];
         spawnTime = Time.time;
         Pause(0.1f);
+
+
+        drawing.SetInteger("FruitLevel", fruitLevel);
     }
 
 
