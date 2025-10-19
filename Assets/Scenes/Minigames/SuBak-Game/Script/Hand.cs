@@ -16,11 +16,12 @@ public class Hand : MonoBehaviour {
     private GM gm;
     private GameResult gr;
 
+    [SerializeField] private Animator spawnerAnime;
+
     // 위치 초기화
     void Start() {
         gm = FindObjectOfType<GM>();
         gr = FindObjectOfType<GameResult>();
-        spawnPoint.transform.localScale = new Vector3(gm.fruitDiameter[spawnLevel - 1], gm.fruitDiameter[spawnLevel - 1], 1);
         formerclick = Time.time;
     }
 
@@ -59,14 +60,12 @@ public class Hand : MonoBehaviour {
         if (r <= 6) nextSpawnLevel = 1;
         else if (r <= 12) nextSpawnLevel = 2;
         else if (r <= 18) nextSpawnLevel = 3;
-        else if (r == 22) nextSpawnLevel = 4;
-        else nextSpawnLevel = 5;
+        else nextSpawnLevel = 4;
 
         spawnPoint.SetActive(false);
         dropSig = true;
+        //spawnerAnime.SetInteger("nextLevel", 0);
         Invoke("SizeChange", clickDelay);
-
-
 
         gm.spawnType = false; // 클릭으로 생성
         Instantiate(fruitPrefab, spawnPoint.transform.position, transform.rotation); // 이후 과일 생성
@@ -77,8 +76,8 @@ public class Hand : MonoBehaviour {
     // 다음 떨굴거 보여주기
     private void SizeChange() {
         dropSig = false;
+        //spawnerAnime.SetInteger("nextLevel", nextSpawnLevel);
         spawnPoint.SetActive(true);
-        spawnPoint.transform.localScale = new Vector3(gm.fruitDiameter[nextSpawnLevel - 1], gm.fruitDiameter[nextSpawnLevel - 1], 1);
     }
 
 
@@ -86,7 +85,6 @@ public class Hand : MonoBehaviour {
     public void ResetGame() {
         spawnLevel = 1;
         nextSpawnLevel = 1;
-        spawnPoint.transform.localScale = new Vector3(gm.fruitDiameter[spawnLevel - 1], gm.fruitDiameter[spawnLevel - 1], 1);
         transform.position = new Vector2(0, transform.position.y);
         gm.score = 0;
     }

@@ -13,7 +13,7 @@ public class OverLine : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject.CompareTag("Fruit")) {
+        if (collision.gameObject.CompareTag("Fruit_SuBak-Game")) {
             gr.GameOver();
         }
     }

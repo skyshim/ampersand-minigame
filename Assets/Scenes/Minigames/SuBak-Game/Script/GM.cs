@@ -12,7 +12,6 @@ public class GM : MonoBehaviour {
     public bool mergeSig = false;
     public Vector2 mergePos;
     public bool spawnType = false; // true : merge, false : click
-    public float[] fruitDiameter = { 0.3f, 0.5f, 0.9f, 1.1f, 1.5f, 1.7f, 2.1f, 2.3f, 2.7f, 3.0f };
     public float[] fruitMass = { 0.01f, 0.05f, 0.1f, 0.2f, 0.35f, 0.55f, 0.8f, 1.1f, 1.45f, 1.85f };
     public int[] fruitScore = { 100, 400, 900, 1600, 2500, 3600, 4900, 6400, 8100, 10000 }; // 레벨별 점수
     public int score = 0;

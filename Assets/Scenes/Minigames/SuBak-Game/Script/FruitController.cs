@@ -10,6 +10,8 @@ public class FruitController : MonoBehaviour {
     private GameResult gr;
     [SerializeField] Animator drawing;
 
+    [SerializeField] private Collider2D[] col;
+
     public int fruitLevel = 1; // 1~10
     private float spawnTime; // 생성시점
     float stayTime = 0f;
@@ -33,8 +35,8 @@ public class FruitController : MonoBehaviour {
         spawnTime = Time.time;
         Pause(0.1f);
 
-
         drawing.SetInteger("FruitLevel", fruitLevel);
+        col[fruitLevel - 1].enabled = true;
     }
 
 

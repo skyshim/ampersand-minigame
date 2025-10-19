@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 95c465f3538df8c489a4bf527928d80b
+guid: 342693082558fb744bbcf2de225a31c6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,85 +123,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 1000000962_0
+      name: IMG_3034_0
       rect:
         serializedVersion: 2
-        x: 67
-        y: 208
-        width: 111
-        height: 53
+        x: 76
+        y: 958
+        width: 810
+        height: 837
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 795feb44aa1bee24683de849b2d39050
-      internalID: -1890795100
+      spriteID: f8c5e1ca4034125459b7dbecbb96c494
+      internalID: -1479059699
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1000000962_1
+      name: IMG_3034_1
       rect:
         serializedVersion: 2
-        x: 68
-        y: 135
-        width: 87
-        height: 43
+        x: 899
+        y: 968
+        width: 810
+        height: 837
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d7252aa173868b4448ae4f7f20a93922
-      internalID: 778647144
+      spriteID: 31a8fa938ef861c43ad64091e80981df
+      internalID: 46492158
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1000000962_2
+      name: IMG_3034_2
       rect:
         serializedVersion: 2
-        x: 67
-        y: 66
-        width: 144
-        height: 52
-      alignment: 9
-      pivot: {x: 0.486072, y: 0.37430748}
+        x: 1723
+        y: 976
+        width: 810
+        height: 837
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 834aa4dba7b9b9844b9cb7b9ac848262
-      internalID: 1295290876
+      spriteID: aa514040dc0bf144d8b4e48c7f4fee7b
+      internalID: 1617720353
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 1000000962_3
+      name: IMG_3034_3
       rect:
         serializedVersion: 2
-        x: 192
-        y: 135
-        width: 72
-        height: 72
+        x: 95
+        y: 86
+        width: 810
+        height: 837
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 05b50b16577b0594e92674e8d8956a2d
-      internalID: 1413777982
+      spriteID: fac6a6affc47bae40bd883e110ac414b
+      internalID: -48920419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_3034_4
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 46
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a9db2e96e903e44bad1f7dc7f3bbb9b
+      internalID: 1940154467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IMG_3034_5
+      rect:
+        serializedVersion: 2
+        x: 1908
+        y: 58
+        width: 900
+        height: 900
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a25e30efa37fe7459992075389fac48
+      internalID: 297833621
       vertices: []
       indices: 
       edges: []
@@ -217,10 +259,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      1000000962_0: -1890795100
-      1000000962_1: 778647144
-      1000000962_2: 1295290876
-      1000000962_3: 1413777982
+      IMG_3034_0: -1479059699
+      IMG_3034_1: 46492158
+      IMG_3034_2: 1617720353
+      IMG_3034_3: -48920419
+      IMG_3034_4: 1940154467
+      IMG_3034_5: 297833621
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
