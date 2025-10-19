@@ -21,6 +21,7 @@ public class to50_Button : MonoBehaviour
     }
     public void OnClicked()
     {
+        Debug.Log(gameManager.currentNumber);
         if (gameManager.isCurrent(num) && gameManager.isStarted)
         {
             if (!isSecond)

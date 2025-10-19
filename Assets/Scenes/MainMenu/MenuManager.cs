@@ -6,6 +6,7 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject popupPanel;
     public TMP_Text popupTitleText;
+    public Image infoImage;
     public TMP_Text popupDescriptionText;
     public Button confirmButton;
     public Button xButton;
@@ -26,10 +27,11 @@ public class MenuManager : MonoBehaviour
     }
 
     // 버튼에서 호출
-    public void ShowPopup(string title, string description, string sceneName, bool hasRanking)
+    public void ShowPopup(string title, string description, string sceneName, Sprite ingameImage)
     {
         popupTitleText.text = title;
         popupDescriptionText.text = description;
+        infoImage.sprite = ingameImage;
 
         nextSceneName = sceneName;
         popupPanel.SetActive(true);

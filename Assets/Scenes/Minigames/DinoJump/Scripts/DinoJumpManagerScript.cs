@@ -11,6 +11,9 @@ public class DinoJumpManagerScript : MonoBehaviour
     public TMP_Text gameText;
     public TMP_Text scoreText;
 
+    public Image bg1;
+    public Image bg2;
+
     public int score = 0;
     public float tm = 0f;
     public float gameSpeed = 1f;
@@ -42,6 +45,9 @@ public class DinoJumpManagerScript : MonoBehaviour
             tm += Time.deltaTime;
             score = (int)tm;
             scoreText.text = score.ToString();
+
+            bg1.gameObject.SetActive(true); 
+            bg2.gameObject.SetActive(true);
         }
         if (isGameovered)
         {
