@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class spawnerAnimation : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] Animator spawnerAnim;
+    [SerializeField] Hand hand;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void ChangeShape(int level) {
+        if (spawnerAnim == null) {
+            Debug.LogError("spawnerAnim이 연결되어 있지 않습니다!");
+            return;
+        }
+
+        spawnerAnim.SetInteger("i", level);
+        Debug.Log(spawnerAnim.GetInteger("i") + "_" + level);   
     }
 }

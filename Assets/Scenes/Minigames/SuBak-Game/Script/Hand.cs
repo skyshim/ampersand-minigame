@@ -15,8 +15,7 @@ public class Hand : MonoBehaviour {
     public GameObject spawnPoint;
     private GM gm;
     private GameResult gr;
-
-    [SerializeField] private Animator spawnerAnime;
+    [SerializeField] spawnerAnimation anim;
 
     // 위치 초기화
     void Start() {
@@ -64,8 +63,9 @@ public class Hand : MonoBehaviour {
 
         spawnPoint.SetActive(false);
         dropSig = true;
-        //spawnerAnime.SetInteger("nextLevel", 0);
-        Invoke("SizeChange", clickDelay);
+        Invoke("SpawnerON", clickDelay);
+        Debug.Log(nextSpawnLevel + "___");
+        anim.ChangeShape(nextSpawnLevel);
 
         gm.spawnType = false; // 클릭으로 생성
         Instantiate(fruitPrefab, spawnPoint.transform.position, transform.rotation); // 이후 과일 생성
@@ -74,9 +74,8 @@ public class Hand : MonoBehaviour {
 
 
     // 다음 떨굴거 보여주기
-    private void SizeChange() {
+    private void SpawnerON() {
         dropSig = false;
-        //spawnerAnime.SetInteger("nextLevel", nextSpawnLevel);
         spawnPoint.SetActive(true);
     }
 

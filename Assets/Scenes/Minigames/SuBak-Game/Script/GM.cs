@@ -58,6 +58,5 @@ public class GM : MonoBehaviour {
 
     public void GetScore(int level) {
         score += fruitScore[level - 1];
-        Debug.Log("Score : " + score);
     }
 }

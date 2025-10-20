@@ -15,6 +15,7 @@ public class FruitController : MonoBehaviour {
     public int fruitLevel = 1; // 1~10
     private float spawnTime; // 생성시점
     float stayTime = 0f;
+    public float overDelay;
 
 
     private void Start() {
@@ -84,13 +85,13 @@ public class FruitController : MonoBehaviour {
             stayTime += Time.deltaTime;
         }
 
-        if (stayTime >= 0.74f && stayTime <= 0.76f) {
+        if (stayTime >= overDelay - 0.3f && stayTime <= overDelay - 0.2f) {
             x = transform.position.x;
             y = transform.position.y;
         }
-        else if (stayTime >= 1f) {
+        else if (stayTime >= overDelay) {
             float a = x - transform.position.x, b = y - transform.position.y;
-            if (a * a + b * b >= 0.025f) {
+            if (a * a + b * b <= 0.025f) {
                 gr.GameOver();
             }
 

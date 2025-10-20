@@ -26,6 +26,7 @@ public class ScoreViewer : MonoBehaviour {
     }
 
     public void ResetScore() {
+        nowScore = 0;
         ScoreText.text = "Score: " + nowScore.ToString();
     }
 

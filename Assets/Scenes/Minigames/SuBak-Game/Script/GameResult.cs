@@ -33,6 +33,7 @@ public class GameResult : MonoBehaviour
             Destroy(fruit);
         }
 
+        score = 0;
         sv.ResetScore();
         hand.ResetGame();
     }

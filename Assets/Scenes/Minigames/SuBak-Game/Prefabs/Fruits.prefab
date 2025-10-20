@@ -184,6 +184,7 @@ MonoBehaviour:
   - {fileID: 8775278110551800231}
   - {fileID: 8139953117240544743}
   fruitLevel: 1
+  overDelay: 2
 --- !u!95 &1250727956601589600
 Animator:
   serializedVersion: 5
