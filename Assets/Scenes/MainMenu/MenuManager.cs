@@ -15,6 +15,7 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
+        Screen.orientation = ScreenOrientation.Portrait;
         popupPanel.SetActive(false);
         confirmButton.onClick.AddListener(OnConfirm);
 

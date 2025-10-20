@@ -208,7 +208,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 77223505}
         m_TargetAssemblyTypeName: Snake_StartBtn, Assembly-CSharp
-        m_MethodName: OnClick12x12
+        m_MethodName: OnClick13x13
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -303,6 +303,7 @@ MonoBehaviour:
   foodManager: {fileID: 1456535594}
   snakeHead: {fileID: 545496403}
   startPanel: {fileID: 1541300716}
+  gameoverPanel: {fileID: 220230893}
   scoreText: {fileID: 807416023}
   gameOverText: {fileID: 427676190}
 --- !u!4 &177018945
@@ -609,7 +610,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -1769,7 +1770,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1952750610}
         m_TargetAssemblyTypeName: Snake_StartBtn, Assembly-CSharp
-        m_MethodName: OnClick15x15
+        m_MethodName: OnClick17x17
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

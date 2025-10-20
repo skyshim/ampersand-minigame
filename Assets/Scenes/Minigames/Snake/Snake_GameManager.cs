@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.EditorTools;
 using UnityEngine;
 
 public class Snake_GameManager : MonoBehaviour
@@ -12,6 +11,7 @@ public class Snake_GameManager : MonoBehaviour
     public GameObject snakeHead;
 
     public GameObject startPanel;
+    public GameObject gameoverPanel;
     public TMP_Text scoreText;
     public TMP_Text gameOverText;
 
@@ -41,6 +41,7 @@ public class Snake_GameManager : MonoBehaviour
         if (!snake.enabled && gameOverText.text == "")
         {
             gameOverText.text = "Game Over!\nFinal Score: " + snake.score;
+            gameoverPanel.SetActive(true);
         }
     }
 }

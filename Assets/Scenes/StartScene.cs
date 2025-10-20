@@ -6,7 +6,10 @@ public class StartSceneManager : MonoBehaviour
 {
     public TMP_Text AnneText;
 
-
+    private void Start()
+    {
+        Screen.orientation = ScreenOrientation.Portrait;
+    }
     void Update()
     {
         if (Input.GetMouseButtonDown(0)) // 클릭 또는 터치

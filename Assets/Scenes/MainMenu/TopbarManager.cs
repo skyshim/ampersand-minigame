@@ -1,20 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TopbarManager : MonoBehaviour
 {
-    public void OnSettingsClicked()
+    public void OnCreditClicked()
     {
-        // 설정 패널 열기 or 씬 전환
-        Debug.Log("설정 버튼 클릭");
-        // 예: UIManager.Instance.ShowSettings();
-    }
-
-    public void OnRankingClicked()
-    {
-        Debug.Log("랭킹 버튼 클릭");
-        // 랭킹 화면 열기
+        Debug.Log("크레딧 버튼 클릭");
+        SceneManager.LoadScene("Credit");
     }
 
     public void OnExitClicked()

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.EditorTools;
 using UnityEngine;
 
 public class Snake_Move : MonoBehaviour
@@ -27,6 +26,7 @@ public class Snake_Move : MonoBehaviour
             GameObject newPart = Instantiate(bodyPrefab, pos, Quaternion.identity);
             bodyParts.Add(newPart.transform);
         }
+
         foodManager.SpawnFood();
     }
 
@@ -44,10 +44,54 @@ public class Snake_Move : MonoBehaviour
 
     void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) && direction != Vector2Int.down) direction = Vector2Int.up;
-        if (Input.GetKeyDown(KeyCode.DownArrow) && direction != Vector2Int.up) direction = Vector2Int.down;
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && direction != Vector2Int.right) direction = Vector2Int.left;
-        if (Input.GetKeyDown(KeyCode.RightArrow) && direction != Vector2Int.left) direction = Vector2Int.right;
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (direction == Vector2Int.down)
+                ReverseSnake();
+            else if (direction != Vector2Int.down)
+                direction = Vector2Int.up;
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (direction == Vector2Int.up)
+                ReverseSnake();
+            else if (direction != Vector2Int.up)
+                direction = Vector2Int.down;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if (direction == Vector2Int.right)
+                ReverseSnake();
+            else if (direction != Vector2Int.right)
+                direction = Vector2Int.left;
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (direction == Vector2Int.left)
+                ReverseSnake();
+            else if (direction != Vector2Int.left)
+                direction = Vector2Int.right;
+        }
+    }
+
+    void ReverseSnake()
+    {
+        Transform head = bodyParts[0];
+        Transform tail = bodyParts[bodyParts.Count - 1];
+
+        Vector3 tempPos = head.position;
+        head.position = tail.position;
+        tail.position = tempPos;
+
+        bodyParts.Reverse();
+
+        Vector2 newDir = (bodyParts[0].position - bodyParts[1].position).normalized;
+        if (Mathf.Abs(newDir.x) > Mathf.Abs(newDir.y))
+            direction = new Vector2Int((int)Mathf.Sign(newDir.x), 0);
+        else
+            direction = new Vector2Int(0, (int)Mathf.Sign(newDir.y));
+
+        Debug.Log("Snake reversed! New head: " + bodyParts[0].name + ", direction: " + direction);
     }
 
     void Move()

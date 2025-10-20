@@ -12,11 +12,12 @@ public class Snake_FoodManager : MonoBehaviour
 
     void Start()
     {
-        snake = FindObjectOfType<Snake_Move>();
+        
     }
 
     public void SpawnFood()
     {
+        snake = FindObjectOfType<Snake_Move>();
         if (currentFood != null) Destroy(currentFood);
 
         float half = gridCount / 2f;
