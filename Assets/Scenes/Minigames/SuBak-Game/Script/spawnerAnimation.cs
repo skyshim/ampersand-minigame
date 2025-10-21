@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class spawnerAnimation : MonoBehaviour
 {
     [SerializeField] Animator spawnerAnim;
     [SerializeField] Hand hand;
+
+    int lv;
 
     public void ChangeShape(int level) {
         if (spawnerAnim == null) {
@@ -14,6 +17,11 @@ public class spawnerAnimation : MonoBehaviour
         }
 
         spawnerAnim.SetInteger("i", level);
-        Debug.Log(spawnerAnim.GetInteger("i") + "_" + level);   
+        lv = level;
+        Invoke("Test", 0.01f);
+    }
+
+    private void Test() {
+        Debug.Log(spawnerAnim.GetInteger("i") + "_" + lv);
     }
 }

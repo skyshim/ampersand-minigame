@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Hand : MonoBehaviour {
-    private float go = 0;
     public int nextSpawnLevel = 1;
     public int spawnLevel = 1; // 1~10
     private float formerclick;
     public float clickDelay = 0.1f; // 클릭 딜레이
     public float mergeDelay;
     public bool dropSig = false;
+
+    public bool isleft = false;
+    public bool isright = false;
+    public bool isdown = false;
 
     public GameObject fruitPrefab;
     public GameObject spawnPoint;
@@ -28,31 +31,18 @@ public class Hand : MonoBehaviour {
     // 플레이어 인풋
     void Update() {
         if (gr.isGameOver) return;
-        // 이동 명령
-        if (transform.position.x < -2) {
-            go = Input.GetAxisRaw("Horizontal");
-            if (go < 0) go = 0;
-            transform.Translate(new Vector2(go, 0) * Time.deltaTime * 5);
-        }
-        else if (transform.position.x > 2) {
-            go = Input.GetAxisRaw("Horizontal");
-            if (go > 0) go = 0;
-            transform.Translate(new Vector2(go, 0) * Time.deltaTime * 5);
-        }
-        else {
-            go = Input.GetAxisRaw("Horizontal");
-            transform.Translate(new Vector2(go, 0) * Time.deltaTime * 5);
-        }
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time - formerclick > clickDelay) {
-            Spawn();
-        }
+        if (isleft && !isright && transform.position.x > -2) transform.Translate(new Vector2(-1, 0) * Time.deltaTime * 5);
+        if (isright && !isleft && transform.position.x < 2) transform.Translate(new Vector2(1, 0) * Time.deltaTime * 5);
+        if (isdown && Time.time - formerclick > clickDelay) Spawn();
+        if (Time.time - formerclick < clickDelay) isdown = false;
     }
 
 
     // 과일 랜덤 생성
     private void Spawn() {
         formerclick = Time.time;
+        isdown = false;
 
         spawnLevel = nextSpawnLevel;
         int r = Random.Range(1, 25);
@@ -76,7 +66,7 @@ public class Hand : MonoBehaviour {
     // 다음 떨굴거 보여주기
     private void SpawnerON() {
         dropSig = false;
-        spawnPoint.SetActive(true);
+        spawnPoint.SetActive(true); 
     }
 
 
