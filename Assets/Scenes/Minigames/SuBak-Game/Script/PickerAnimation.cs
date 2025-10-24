@@ -20,6 +20,9 @@ public class PickerAnimation : MonoBehaviour
     {
         if (hand.dropSig) {
             picker.SetBool("letItGo", true);
+            foreach (AnimatorControllerParameter p in picker.parameters) {
+                Debug.Log($"{p.name} : {p.type}");
+            }
         }
         else {
             picker.SetBool("letItGo", false);

@@ -13,32 +13,30 @@ public class JoyStickScript_SubakGame : MonoBehaviour
         
     }
 
-    private void OnMouseOver() {
+
+    private void OnMouseDown() {
         Color c = ren.color;
         c.a = 1f;
+        ren.color = c;
 
         switch (gameObject.name) {
             case "left": hand.isleft = true; ren.color = c; break;
             case "right": hand.isright = true; ren.color = c; break;
+            case "down":
+                hand.isdown = true;
+                Invoke("DownBtnOn", hand.clickDelay - 0.01f);
+                break;
         }
     }
-    private void OnMouseExit() {
+
+    private void OnMouseUp() {
         Color c = ren.color;
         c.a = 0f;
-
+        ren.color = c;
         switch (gameObject.name) {
             case "left": hand.isleft = false; ren.color = c; break;
             case "right": hand.isright = false; ren.color = c; break;
-        }
-    }
-
-    private void OnMouseDown() {
-        if (gameObject.name == "down") {
-            hand.isdown = true;
-            Color c = ren.color;
-            c.a = 1f;
-            ren.color = c;
-            Invoke("DownBtnOn", hand.clickDelay-0.01f);
+            case "down": hand.isdown = false; ren.color = c; break;
         }
     }
 

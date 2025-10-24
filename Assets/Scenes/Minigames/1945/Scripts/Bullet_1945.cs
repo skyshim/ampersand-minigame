@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Bullet_1945 : MonoBehaviour {
     private bool gogo = false;
-    public float speed = 10f;
+    private float speed;
+    public string whoSpawn; 
 
     // Start is called before the first frame update
     private void OnEnable() {
         gogo = true;
+        switch (whoSpawn) {
+            case "player": speed = 10f; break;
+            case "enemy_Gun": speed = 6f; break;
+        }
     }
 
     private void Update() {

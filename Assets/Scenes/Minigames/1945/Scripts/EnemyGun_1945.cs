@@ -5,16 +5,17 @@ using UnityEngine;
 public class EnemyGun_1945 : MonoBehaviour
 {
     [SerializeField] private GameObject bullet;
+    [SerializeField] private GM_1945 gm;
 
     private float fireTimer = 0f;
-    public float interval = 1f;
+    private float interval;
 
     public float speed = 6f;
+    public float bulletRange;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private void Start() {
+        gm = FindObjectOfType<GM_1945>();
+        interval = 60f / gm.bpm;
     }
 
     // Update is called once per frame
@@ -24,8 +25,8 @@ public class EnemyGun_1945 : MonoBehaviour
 
         fireTimer += Time.deltaTime;
 
-        // 발사 타이밍 도달 시
-        if (fireTimer >= interval / 4) {
+        //발사 타이밍 도달 시
+        if (fireTimer >= interval) {
             FireBullet();
             fireTimer = 0f; // 타이머 초기화
         }
@@ -39,9 +40,10 @@ public class EnemyGun_1945 : MonoBehaviour
 
 
     private void FireBullet() {
-        GameObject a = Instantiate(bullet, transform.position + new Vector3(-0.3f, 0.5f, 1), transform.rotation);
-        GameObject b = Instantiate(bullet, transform.position + new Vector3(+0.3f, 0.5f, 1), transform.rotation);
-        a.tag = "bullet-p_1945";
-        b.tag = "bullet-p_1945";
+        float rad = transform.rotation.eulerAngles.z * Mathf.Deg2Rad;
+        GameObject a = Instantiate(bullet, transform.position + new Vector3(bulletRange * Mathf.Cos(rad), bulletRange * Mathf.Sin(rad), 1), transform.rotation);
+        GameObject b = Instantiate(bullet, transform.position - new Vector3(bulletRange * Mathf.Cos(rad), bulletRange * Mathf.Sin(rad), 1), transform.rotation);
+        a.tag = "bullet-p_1945"; a.GetComponent<Bullet_1945>().whoSpawn = "enemy_Gun";
+        b.tag = "bullet-p_1945"; b.GetComponent<Bullet_1945>().whoSpawn = "enemy_Gun";
     }
 }

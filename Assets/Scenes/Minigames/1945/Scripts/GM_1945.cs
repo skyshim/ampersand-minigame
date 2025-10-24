@@ -24,19 +24,16 @@ public class GM_1945 : MonoBehaviour
 
     void spawnGunner() {
         // 출발 지점 설정
-        Vector2 spawnPos = new Vector2(Random.Range(-4f, 4f), Random.Range(-6f, 6f));
-        int fixValue = Random.Range(0, 4);
+        Vector2 spawnPos = new Vector2(Random.Range(-4f, 4f), Random.Range(0f, 6f));
+        int fixValue = Random.Range(0, 3);
         switch (fixValue) {
             case 0:
                 spawnPos.y = 6f;    
                 break;
             case 1:
-                spawnPos.y = -6f;
-                break;
-            case 2:
                 spawnPos.x = -4f;
                 break;
-            case 3:
+            case 2:
                 spawnPos.x = 4f;
                 break;
         }
@@ -47,7 +44,6 @@ public class GM_1945 : MonoBehaviour
         int s = 1;
         if (Random.Range(0, 2) == 0) s = -1;
         float y = Mathf.Sqrt(4 - x * x);
-        // // 목적지 : (x, s*y)
 
         float m = (s * y - spawnPos.y) / (x - spawnPos.x); // 기울기
         float rad = Mathf.Atan(m); // 라디안

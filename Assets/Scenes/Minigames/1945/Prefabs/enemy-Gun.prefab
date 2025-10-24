@@ -99,8 +99,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3e03328432a7834ea1e94e91a8685ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 0}
+  bullet: {fileID: 5324287700060733350, guid: 86fcc63ef48ed0547815fb584f3166d6, type: 3}
+  interval: 1
   speed: 6
+  bulletRange: 0.3
 --- !u!60 &-3198621685723333489
 PolygonCollider2D:
   m_ObjectHideFlags: 0
