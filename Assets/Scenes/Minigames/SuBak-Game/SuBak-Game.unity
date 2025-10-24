@@ -1731,7 +1731,7 @@ Animator:
   m_GameObject: {fileID: 1008757347}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ec677c5f37867fe44a46f332c9f5cf92, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8acec19dc1ffa8d49a420e58d01442ee, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3315,7 +3315,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1619374659}
   - component: {fileID: 1619374658}
-  - component: {fileID: 1619374660}
   m_Layer: 0
   m_Name: Picker
   m_TagString: Untagged
@@ -3345,7 +3344,6 @@ MonoBehaviour:
   isdown: 0
   fruitPrefab: {fileID: 5601088235971426903, guid: 11596d77a3cddfb4eb4a1a35eda09d6a, type: 3}
   spawnPoint: {fileID: 1008757347}
-  anim: {fileID: 1008757351}
 --- !u!4 &1619374659
 Transform:
   m_ObjectHideFlags: 0
@@ -3364,27 +3362,6 @@ Transform:
   - {fileID: 1008757348}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1619374660
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1619374657}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 356dbc6ede2f76943b5bfc9c0fad329f, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1748316453
 GameObject:
   m_ObjectHideFlags: 0

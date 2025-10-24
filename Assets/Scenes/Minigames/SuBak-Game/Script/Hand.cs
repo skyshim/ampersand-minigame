@@ -18,12 +18,14 @@ public class Hand : MonoBehaviour {
     public GameObject spawnPoint;
     private GM gm;
     private GameResult gr;
-    [SerializeField] spawnerAnimation anim;
+    private spawnerAnimation anim;
 
     // 위치 초기화
     void Start() {
         gm = FindObjectOfType<GM>();
         gr = FindObjectOfType<GameResult>();
+        anim = spawnPoint.GetComponent<spawnerAnimation>();
+        if (anim == null) Debug.Log("anim null");
         formerclick = Time.time;
     }
 
@@ -51,10 +53,9 @@ public class Hand : MonoBehaviour {
         else if (r <= 18) nextSpawnLevel = 3;
         else nextSpawnLevel = 4;
 
-        spawnPoint.SetActive(false);
+        anim.TurnOFF();
         dropSig = true;
         Invoke("SpawnerON", clickDelay);
-        Debug.Log(nextSpawnLevel + "___");
         anim.ChangeShape(nextSpawnLevel);
 
         gm.spawnType = false; // 클릭으로 생성
@@ -66,7 +67,7 @@ public class Hand : MonoBehaviour {
     // 다음 떨굴거 보여주기
     private void SpawnerON() {
         dropSig = false;
-        spawnPoint.SetActive(true); 
+        anim.TurnON();
     }
 
 

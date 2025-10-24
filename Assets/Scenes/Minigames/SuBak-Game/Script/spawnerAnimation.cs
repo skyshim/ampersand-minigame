@@ -7,41 +7,25 @@ public class spawnerAnimation : MonoBehaviour
 {
     [SerializeField] Animator spawnerAnim;
     [SerializeField] Hand hand;
+    private SpriteRenderer sr;
 
     int lv;
     
-    public void ChangeShape(int level) {
-        if (spawnerAnim == null) {
-            Debug.LogError("spawnerAnim이 연결되어 있지 않습니다!");
-            return;
-        }
-
-        spawnerAnim.SetInteger("level", level);
-        lv = level;
-        switch (level) {
-            case 1:
-                spawnerAnim.Play("lv1");
-                break;
-            case 2:
-                spawnerAnim.Play("lv2");
-                break;
-            case 3:
-                spawnerAnim.Play("lv3");
-                break;
-            case 4:
-                spawnerAnim.Play("lv4");
-                break;
-            case 5:
-                spawnerAnim.Play("lv5");
-                break;
-        }
-        Invoke("Test", 0.01f);
+    void Start()
+    {
+        sr = gameObject.GetComponent<SpriteRenderer>();
     }
 
-    private void Test() {
-        Debug.Log(spawnerAnim.GetInteger("level") + "_" + lv);
-        foreach (AnimatorControllerParameter p in spawnerAnim.parameters) {
-            Debug.Log($"{p.name} : {p.type}");
-        }
+
+    public void ChangeShape(int level) {
+        spawnerAnim.SetInteger("level", level);
+    }
+
+    public void TurnON() {
+        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f); // TurnON
+    }
+
+    public void TurnOFF() {
+        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0f); // TurnOFF
     }
 }
