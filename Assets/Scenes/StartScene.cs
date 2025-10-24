@@ -10,14 +10,10 @@ public class StartSceneManager : MonoBehaviour
     {
         Screen.orientation = ScreenOrientation.Portrait;
     }
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0)) // 클릭 또는 터치
+    void Update() {
+        if (Input.GetMouseButtonDown(0))
         {
-
             SceneManager.LoadScene("MainMenu");
- 
         }
     }
-
 }
