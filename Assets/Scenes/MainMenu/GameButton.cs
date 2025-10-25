@@ -8,6 +8,7 @@ public class GameButton : MonoBehaviour
     public string description;       // 팝업 본문
     public string sceneName;         // 전환할 씬 이름
     public Sprite ingameImage;
+    public Sprite styleSprite;
 
     private Button button;
     private MenuManager menuManager;
@@ -26,6 +27,6 @@ public class GameButton : MonoBehaviour
     private void OnClick()
     {
         // 메뉴 매니저에 정보 전달
-        menuManager.ShowPopup(title, description, sceneName, ingameImage);
+        menuManager.ShowPopup(title, description, sceneName, ingameImage, styleSprite);
     }
 }
