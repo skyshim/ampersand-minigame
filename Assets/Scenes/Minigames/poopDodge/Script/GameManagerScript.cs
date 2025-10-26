@@ -10,7 +10,7 @@ public class GameManagerScript : MonoBehaviour
     public bool isGameOver = false;
     public bool isGameStart = false;
 
-    public int gamemode = 1;
+    public int gamemode = 2;
     public int cnt = 0;
 
     public Button gameBtn;
@@ -24,8 +24,10 @@ public class GameManagerScript : MonoBehaviour
     void Start()
     {
         gameBtn.onClick.AddListener(gameStart);
-        quitBtn.onClick.AddListener(quitGame);
         Screen.orientation = ScreenOrientation.Portrait;
+
+        gamemodeDrp.onValueChanged.AddListener(OnGamemodeChanged);
+        OnGamemodeChanged(gamemodeDrp.value);
     }
 
     // Update is called once per frame
@@ -33,7 +35,7 @@ public class GameManagerScript : MonoBehaviour
     {
         if (isGameOver)
         {
-            quitBtn.gameObject.SetActive(true); 
+            quitBtn.gameObject.SetActive(true);
             gameBtn.gameObject.SetActive(true);
             gameBtnTxt.text = "Restart?";
 
@@ -48,18 +50,20 @@ public class GameManagerScript : MonoBehaviour
         }
         else { score.text = cnt.ToString(); }
     }
+    void OnGamemodeChanged(int value)
+    {
+        gamemode = value + 1;
+    }
     void gameStart()
     {
         isGameStart = true;
+        gamemode = gamemodeDrp.value + 1;
         gameBtn.gameObject.SetActive(false);
         gamemodeDrp.gameObject.SetActive(false);
         quitBtn.gameObject.SetActive(false);
-        gamemode = gamemodeDrp.value + 1;
         gameBtn.onClick.RemoveAllListeners();
         gameBtn.onClick.AddListener(restart);
     }
 
     void restart() { SceneManager.LoadScene("poopDodge"); }
-
-    void quitGame() { Application.Quit(); }
 }
