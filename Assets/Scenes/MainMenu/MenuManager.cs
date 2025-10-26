@@ -5,10 +5,10 @@ using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
     public GameObject popupPanel;
-    public TMP_Text popupTitleText;
+    public Text popupTitleText;
     public Image infoImage;
     public Image styleImage;
-    public TMP_Text popupDescriptionText;
+    public Text popupDescriptionText;
     public Button confirmButton;
     public Button xButton;
 
