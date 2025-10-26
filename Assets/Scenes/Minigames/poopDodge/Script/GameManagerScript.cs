@@ -14,7 +14,7 @@ public class GameManagerScript : MonoBehaviour
     public int cnt = 0;
 
     public Button gameBtn;
-    public Button quitBtn;
+    //public Button quitBtn;
     public TMP_Text gameBtnTxt;
     public TMP_Dropdown gamemodeDrp;
     public TMP_Text score;
@@ -35,7 +35,7 @@ public class GameManagerScript : MonoBehaviour
     {
         if (isGameOver)
         {
-            quitBtn.gameObject.SetActive(true);
+            //quitBtn.gameObject.SetActive(true);
             gameBtn.gameObject.SetActive(true);
             gameBtnTxt.text = "Restart?";
 
@@ -60,7 +60,7 @@ public class GameManagerScript : MonoBehaviour
         gamemode = gamemodeDrp.value + 1;
         gameBtn.gameObject.SetActive(false);
         gamemodeDrp.gameObject.SetActive(false);
-        quitBtn.gameObject.SetActive(false);
+        //quitBtn.gameObject.SetActive(false);
         gameBtn.onClick.RemoveAllListeners();
         gameBtn.onClick.AddListener(restart);
     }
