@@ -14,7 +14,6 @@ public class TopbarManager : MonoBehaviour
     public void OnExitClicked()
     {
         Debug.Log("나가기 버튼 클릭");
-        Application.Quit(); // 빌드된 게임에서 종료
-        // 에디터에서는 작동 안 함
+        SceneManager.LoadScene("Start");
     }
 }
