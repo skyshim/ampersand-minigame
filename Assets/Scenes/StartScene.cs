@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class StartSceneManager : MonoBehaviour
 {
     public TMP_Text AnneText;
+    public GameObject understandPanel;
+    public bool doYouUnderstand = false;
 
     private void Start()
     {
@@ -13,7 +15,16 @@ public class StartSceneManager : MonoBehaviour
     void Update() {
         if (Input.GetMouseButtonDown(0))
         {
-            SceneManager.LoadScene("MainMenu");
+            if (doYouUnderstand)
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
+            else
+            {
+                doYouUnderstand = true;
+                understandPanel.SetActive(true);
+            }
+            
         }
     }
 }
