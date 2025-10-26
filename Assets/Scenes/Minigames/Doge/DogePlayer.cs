@@ -57,9 +57,6 @@ public class DogePlayer : MonoBehaviour
                 if (DogeOverField != null)
                     DogeOverField.SetActive(true);
 
-                // 필요 시 씬 재시작
-                // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
                 break;
             }
         }
