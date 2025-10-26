@@ -348,6 +348,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameFavicon (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1629026635483733102, guid: a697a6b575b7c4046ab5d2afed8dfc65, type: 3}
+      propertyPath: m_Text
+      value: 'Dodge
+
+'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
