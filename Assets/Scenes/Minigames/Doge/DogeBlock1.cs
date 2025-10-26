@@ -8,8 +8,16 @@ public class DogeBlock1 : MonoBehaviour
     private float doge_block_speed = 70f;
     private Collider2D myCollider;
 
+    private static bool allStopped = false;
+
+    public static bool AllStopped
+    {
+        get { return allStopped; }
+    }
+
     void Start()
     {
+        allStopped = false; 
         myCollider = GetComponent<Collider2D>();
 
         direction = (Vector2.left + Vector2.up).normalized;
@@ -36,9 +44,11 @@ public class DogeBlock1 : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (allStopped)
+            return;
+
         transform.Translate(direction * doge_block_speed * Time.deltaTime);
     }
 
@@ -65,6 +75,12 @@ public class DogeBlock1 : MonoBehaviour
         {
             direction = Vector2.Reflect(direction, Vector2.right);
             Debug.Log("West wall hit → reflected right");
+        }
+        else if (name == "DogePlayer")
+        {
+            allStopped = true;
+            direction = Vector2.zero;
+            Debug.Log("Player hit → ALL blocks stopped");
         }
     }
 }
