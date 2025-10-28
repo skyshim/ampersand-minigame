@@ -12,8 +12,8 @@ public class to50_GameManager : MonoBehaviour
     public Transform buttonParent;
     public to50_Timer timer;
     public Image endPanel;
-
     public Image startPanel;
+    public GameObject rankingPanel;
     public TMP_Text countdownText;
 
     public List<Button> buttons = new List<Button>();
@@ -30,6 +30,7 @@ public class to50_GameManager : MonoBehaviour
     {
         Screen.orientation = ScreenOrientation.Portrait;
 
+        rankingPanel.SetActive(false);
         firstNumbers.Shuffle();
         secondNumbers.Shuffle();
         GenerateButtons();
@@ -95,6 +96,7 @@ public class to50_GameManager : MonoBehaviour
     {
         timer.StopTimer();
         endPanel.gameObject.SetActive(true);
+        rankingPanel.SetActive(true);
     }
 
     public bool isCurrent(int input)

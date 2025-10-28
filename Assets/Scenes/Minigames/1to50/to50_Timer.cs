@@ -8,7 +8,7 @@ public class to50_Timer : MonoBehaviour
 {
     public TMP_Text timerText;
     public to50_GameManager gameManager;
-    private float timer = 0f;
+    public float timer = 0f;
     private bool isTimerOn = true;
 
     // Update is called once per frame

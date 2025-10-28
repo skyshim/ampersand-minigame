@@ -20,6 +20,9 @@ public class UM : MonoBehaviour
     [SerializeField] private GameObject exitBtn;
     [SerializeField] private UnityEngine.UI.Text FinalText;
 
+    //심성우왔다감 :)
+    public GameObject rankingPanel;
+
     void Start() {
         gr = FindObjectOfType<GameResult>();
     }
@@ -39,6 +42,7 @@ public class UM : MonoBehaviour
                 over.SetActive(true);
                 resetBtn.SetActive(true);
                 //itemBtn.SetActive(true);
+                rankingPanel.SetActive(true);
                 FTOnOff(1);
                 break;
             case 3: // 클리어

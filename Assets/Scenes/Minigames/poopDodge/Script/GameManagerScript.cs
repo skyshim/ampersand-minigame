@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -19,6 +20,7 @@ public class GameManagerScript : MonoBehaviour
     public TMP_Dropdown gamemodeDrp;
     public TMP_Text score;
     public TMP_Text gameScore;
+    public GameObject rankingPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -47,12 +49,15 @@ public class GameManagerScript : MonoBehaviour
             }
             gameScore.gameObject.SetActive(true);
             gameScore.text = "Best score : " + (int)bestScore;
+
+            if (gamemode == 1) rankingPanel.SetActive(true);
         }
         else { score.text = cnt.ToString(); }
     }
     void OnGamemodeChanged(int value)
     {
         gamemode = value + 1;
+        Debug.Log(gamemode);
     }
     void gameStart()
     {

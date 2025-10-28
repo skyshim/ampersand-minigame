@@ -22,6 +22,8 @@ public class Knife_RoundManager : MonoBehaviour
     public Knife_RoundUI roundUI;
     public Knife_TimeControl timer;
     public Knife_RoundResult roundResult;
+
+    public FirebaseRanking firebase;
     [SerializeField] private GameObject Knife;
 
     public RoundData[] rounds;
@@ -34,6 +36,7 @@ public class Knife_RoundManager : MonoBehaviour
 
     void Start()
     {
+        FirebaseRanking firebase = FindObjectOfType<FirebaseRanking>();
         //=============라운드 설정=============//
 
         rounds = new RoundData[]
@@ -189,17 +192,12 @@ public class Knife_RoundManager : MonoBehaviour
             roundUI.AddScore(Mathf.RoundToInt(timer.currentTime * 60f));
         }
         roundResult.ShowClear();
-        Invoke("StartRound", 3f);
+        Invoke("StartRound", 1f);
     }
 
     public void RoundFail()
     {
         int finalScore = roundUI.LoadScore();
-        //var user = RankingManager.Instance.auth.CurrentUser;
-        //if (user != null)
-        //    playerName = user.DisplayName ?? "Guest";
-
-        //RankingManager.Instance.AddNewRecord("knife", playerName, finalScore, false);
         StartCoroutine(RoundFailDelay());
     }
 

@@ -5,12 +5,15 @@ using UnityEngine.UI;
 public class MenuManager : MonoBehaviour
 {
     public GameObject popupPanel;
+    public GameObject rankingPanel;
     public Text popupTitleText;
     public Image infoImage;
     public Image styleImage;
     public Text popupDescriptionText;
+
     public Button confirmButton;
     public Button xButton;
+    public Button r_xButton;
 
     private string nextSceneName;   // 확인 후 이동할 씬 이름
 
@@ -22,10 +25,16 @@ public class MenuManager : MonoBehaviour
 
         if (xButton != null)
             xButton.onClick.AddListener(ClosePopup);
+        r_xButton.onClick.AddListener(CloseRanking);
     }
     public void ClosePopup()
     {
         popupPanel.SetActive(false);
+    }
+
+    public void CloseRanking()
+    {
+        rankingPanel.SetActive(false);
     }
 
     // 버튼에서 호출

@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class ResetBtnScript : MonoBehaviour
 {
+    public GameObject rankingPanel;
     public UnityEvent onClick;
     private UM um;
 
@@ -23,6 +24,7 @@ public class ResetBtnScript : MonoBehaviour
 
     private void OnMouseDown() {
         if (getInput) {
+            rankingPanel.SetActive(false);
             Onclick();
         }
     }

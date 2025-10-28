@@ -5,10 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class TopbarManager : MonoBehaviour
 {
+    public GameObject RankingPopup;
+
     public void OnCreditClicked()
     {
         Debug.Log("크레딧 버튼 클릭");
         SceneManager.LoadScene("Credit");
+    }
+    public void OnRankingClicked()
+    {
+        Debug.Log("랭킹 버튼 클릭");
+        RankingPopup.SetActive(true);
     }
 
     public void OnExitClicked()
