@@ -17,10 +17,10 @@ public class Subak_Ranking : MonoBehaviour
     private void Start()
     {
         firebase = FindAnyObjectByType<FirebaseRanking>();
-        submitButton.onClick.AddListener(OnSubmit);
+        submitButton.onClick.AddListener(OnSubmit); 
     }
 
-    public void OnClickButton()
+    public void OnMouseDown()
     {
         inputPanel.SetActive(true); // 버튼 누르면 입력창 활성화
         inputField.text = "";       // 초기화
@@ -28,6 +28,7 @@ public class Subak_Ranking : MonoBehaviour
 
     private void OnSubmit()
     {
+        Debug.Log("2");
         string nickname = inputField.text.Trim();
         if (!string.IsNullOrEmpty(nickname))
         {

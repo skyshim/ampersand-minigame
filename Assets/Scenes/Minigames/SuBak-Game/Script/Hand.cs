@@ -77,6 +77,7 @@ public class Hand : MonoBehaviour {
         nextSpawnLevel = 1;
         transform.position = new Vector2(0, transform.position.y);
         gm.score = 0;
+        anim.ChangeShape(nextSpawnLevel);
     }
 
 }

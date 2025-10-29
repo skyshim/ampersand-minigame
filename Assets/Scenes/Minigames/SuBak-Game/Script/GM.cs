@@ -7,6 +7,7 @@ public class GM : MonoBehaviour {
     public bool isItemMode = false;
     public GameObject fruitprefab;
     public int mergeLevel = 1;
+    public bool isRankingSubmitted = false;
 
     [HideInInspector]
     public bool mergeSig = false;

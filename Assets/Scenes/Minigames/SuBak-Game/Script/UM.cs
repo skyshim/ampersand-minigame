@@ -10,18 +10,19 @@ public class UM : MonoBehaviour
     [SerializeField] private GameObject window;
 
     [SerializeField] private GameObject title;
+    [SerializeField] private GameObject menuTitle;
     [SerializeField] private GameObject over;
     [SerializeField] private GameObject clear;
     [SerializeField] private GameObject menuBtn;
     [SerializeField] private GameObject resetBtn;
     [SerializeField] private GameObject continueBtn;
     [SerializeField] private GameObject playBtn;
-    [SerializeField] private GameObject itemBtn;
     [SerializeField] private GameObject exitBtn;
     [SerializeField] private UnityEngine.UI.Text FinalText;
 
     //심성우왔다감 :)
     public GameObject rankingPanel;
+    public GameObject inputPanel;
 
     void Start() {
         gr = FindObjectOfType<GameResult>();
@@ -52,6 +53,7 @@ public class UM : MonoBehaviour
                 FTOnOff(1);
                 break;
             case 4: // 메뉴
+                menuTitle.SetActive(true);
                 continueBtn.SetActive(true);
                 resetBtn.SetActive(true);
                 exitBtn.SetActive(true);
@@ -67,14 +69,17 @@ public class UM : MonoBehaviour
         window.SetActive(false);
 
         title.SetActive(false);
+        menuTitle.SetActive(false);
         over.SetActive(false);
         clear.SetActive(false);
         resetBtn.SetActive(false);
         continueBtn.SetActive(false);
         playBtn.SetActive(false);
-        //itemBtn.SetActive(false);
         exitBtn.SetActive(false);
         FTOnOff(0);
+
+        rankingPanel.SetActive(false);
+        inputPanel.SetActive(false);
 
         gr.isGameOver = false;
     }
